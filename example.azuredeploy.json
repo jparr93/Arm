@@ -138,7 +138,6 @@
                     "uri": "[concat (variables('linkedtemplateuri'), 'windowsvm.json')]"
                 },
                 "parameters": {
-                    "virtualNetworkResourceGroup": "arm-testing"
                 }
 
             }
