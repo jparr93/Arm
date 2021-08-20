@@ -73,7 +73,7 @@
     "variables": {
         "nicName": "[concat('vmNIC-',parameters('vmName'))]",
         "vnetID": "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
-        "subnetRef": "[concat(variables('vnetID'),'/subnets/', parameters('subnetName'))]"
+        "subnetRef": "/subscriptions/876fac0a-dc5d-40c0-8a6a-7b9cf9fa294e/resourceGroups/Arm-Testing/objectvnet/subnet1"
     },
     "resources": [
         {
