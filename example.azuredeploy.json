@@ -121,6 +121,22 @@
                 }
 
             }
+        },
+          {
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2017-08-01",
+            "name": "deploy-windows-vm-linked-template",
+            "dependsOn": [],
+
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[concat (variables('linkedtemplateuri'), 'windowsvm.json')]"
+                },
+                "parameters": {
+                }
+
+            }
         }
     ]
 }
