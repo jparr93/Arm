@@ -127,7 +127,10 @@
             "type": "Microsoft.Resources/deployments",
             "apiVersion": "2017-08-01",
             "name": "deploy-windows-vm-linked-template",
-            "dependsOn": [],
+            "dependsOn":[
+                "['subnets']"
+    ],
+        
 
             "properties": {
                 "mode": "Incremental",
