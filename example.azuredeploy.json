@@ -134,6 +134,10 @@
                     "uri": "[concat (variables('linkedtemplateuri'), 'windowsvm.json')]"
                 },
                 "parameters": {
+                    "virtualMachineAdminPassword" : "P@44w0rd!!",
+                    "virtualNetworkName" : "[variables ('vnetname')]",
+                    "virtualNetworkResourceGroup" : "arm-testing",
+                    "subnetName": "[concat (variables ('vnetname'),'/',parameters('subnets')[copyIndex('subnets')].name[1])]"
                 }
 
             }
