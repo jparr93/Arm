@@ -115,6 +115,9 @@
                 "parameters": {
                     "name": {
                         "value": "[concat (parameters('managedidentityname'), uniqueString(resourceGroup().id))]"
+                    },
+                    "storageaccountcount" : {
+                        "value" : "2"
                     }
                 }
 
