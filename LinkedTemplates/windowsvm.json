@@ -25,19 +25,21 @@
         },
         "virtualNetworkName": {
             "type": "string",
+            "defaultValue" : "objectvnet",
             "metadata": {
                 "description": "VNET Name"
             }
         },
         "virtualNetworkResourceGroup": {
             "type": "string",
-            "defaultValue": "arm-testing",
+            "defaultValue" : "arm-testing",
             "metadata": {
                 "description": "Resource Group VNET is deployed in"
             }
         },
         "subnetName": {
             "type": "string",
+            "defaultValue" : "subnet1",
             "metadata": {
                 "description": "Name of the subnet inside the VNET"
             }
@@ -74,7 +76,7 @@
     "variables": {
         "nicName": "[concat('vmNIC-',parameters('vmName'))]",
         "vnetID": "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
-        "subnetRef": "/subscriptions/876fac0a-dc5d-40c0-8a6a-7b9cf9fa294e/resourceGroups/Arm-Testing/objectvnet/subnet1"
+        "subnetRef": "[concat(variables('vnetID'),'/subnets/', parameters('subnetName'))]"
     },
     "resources": [
         {
