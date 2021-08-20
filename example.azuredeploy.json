@@ -13,6 +13,9 @@
         "networkSecurityGroupRules1": {
             "type": "array"
         },
+        "adminpassword" : {
+            "type" : "securestring"
+        },
         "networkparameters": {
             "type": "object"
         },
@@ -135,7 +138,7 @@
                     "uri": "[concat (variables('linkedtemplateuri'), 'windowsvm.json')]"
                 },
                 "parameters": {
-                    "virtualMachineAdminPassword": "P@44w0rd!!",
+                    "virtualMachineAdminPassword": "[parameters ('adminpassword')]",
                     "virtualNetworkName": "[variables ('vnetname')]",
                     "virtualNetworkResourceGroup": "arm-testing",
                     "subnetName": "[concat (variables ('vnetname'),'/','subnet1')]"

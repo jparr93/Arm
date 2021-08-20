@@ -65,6 +65,9 @@
         },
         "managedidentityname" : {
             "value": "awesomeMI"
+        },
+        "adminpassword" : {
+            "value": "ForestNott123!!"
         }
     }
 }
