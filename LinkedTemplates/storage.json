@@ -8,24 +8,15 @@
 
         "location": {
             "type": "String"
-        },
-        "storageaccountcount": {
-            "type": "int"
         }
     },
-    "variables": {
-        "accountname": "[concat (parameters('name'), copyindex())]"
-    },
+    "variables": {},
     "resources": [
         {
             "type": "Microsoft.Storage/storageAccounts",
             "apiVersion": "2021-04-01",
-            "name": "[variables ('accountname')]",
+            "name": "[parameters('name')]",
             "location": "[parameters('location')]",
-            "copy": {
-                "name": "subnets",
-                "count": "[parameters('storageaccountcount')]"
-            },
             "sku": {
                 "name": "Standard_LRS",
                 "tier": "Standard"
@@ -93,9 +84,9 @@
         {
             "type": "Microsoft.Storage/storageAccounts/queueServices",
             "apiVersion": "2021-04-01",
-            "name": "[concat(variables ('accountname'), '/default')]",
+            "name": "[concat(parameters('name'), '/default')]",
             "dependsOn": [
-                "[resourceId('Microsoft.Storage/storageAccounts', variables ('accountname'))]"
+                "[resourceId('Microsoft.Storage/storageAccounts', parameters('name'))]"
             ],
             "properties": {
                 "cors": {
@@ -106,9 +97,9 @@
         {
             "type": "Microsoft.Storage/storageAccounts/tableServices",
             "apiVersion": "2021-04-01",
-            "name": "[concat(variables ('accountname'), '/default')]",
+            "name": "[concat(parameters('name'), '/default')]",
             "dependsOn": [
-                "[resourceId('Microsoft.Storage/storageAccounts', variables ('accountname'))]"
+                "[resourceId('Microsoft.Storage/storageAccounts', parameters('name'))]"
             ],
             "properties": {
                 "cors": {
