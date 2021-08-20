@@ -138,7 +138,7 @@
                     "uri": "[concat (variables('linkedtemplateuri'), 'windowsvm.json')]"
                 },
                 "parameters": {
-                    "virtualNetworkName": "[variables ('vnetname')]",
+                    "virtualNetworkName": "objectvnet",
                     "virtualNetworkResourceGroup": "arm-testing",
                     "subnetName": "[concat (variables ('vnetname'),'/','subnet1')]"
                 }
