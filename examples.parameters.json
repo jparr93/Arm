@@ -1,0 +1,70 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "subnets": {
+            "value": [
+                {
+                    "name": "subnet1",
+                    "prefix": "10.0.1.0/24"
+                },
+                {
+                    "name": "subnet2",
+                    "prefix": "10.0.2.0/24"
+                }
+            ]
+        },
+        "networkSecurityGroupRules1": {
+            "value": [
+                {
+                    "name": "rdp-rule",
+                    "properties": {
+                        "description": "Allow RDP",
+                        "protocol": "Tcp",
+                        "sourcePortRange": "*",
+                        "destinationPortRange": "3389",
+                        "sourceAddressPrefix": "Internet",
+                        "destinationAddressPrefix": "*",
+                        "access": "Allow",
+                        "priority": 100,
+                        "direction": "Inbound"
+                    }
+                },
+                {
+                    "name": "BEST-rule",
+                    "properties": {
+                        "description": "Allow special RDP",
+                        "protocol": "Tcp",
+                        "sourcePortRange": "*",
+                        "destinationPortRange": "33389",
+                        "sourceAddressPrefix": "Internet",
+                        "destinationAddressPrefix": "*",
+                        "access": "Allow",
+                        "priority": 100,
+                        "direction": "Outbound"
+                    }
+                }
+            ]
+        },
+        "networkparameters": {
+            "value": {
+                "virtualnetwork": {
+                    "virtualnetworkname": "objectvnet",
+                    "virtualnetworkprefix": "10.0.0.0/16"
+                },
+                "networksecuritygroup": {
+                    "nsgname": "objectnsg"
+                }
+            }
+        },
+        "storageAccounts_location" : {
+            "value" : "uksouth"
+        },
+        "storageAccounts_prefix" : {
+            "value": "joe"
+        },
+        "managedidentityname" : {
+            "value": "awesomeMI"
+        }
+    }
+}

@@ -1,0 +1,43 @@
+** template file **
+
+"parameters": {
+    "DeploymentParameters": {           
+        "type": "object"
+    },
+    "ActiveDirectoryParameters": {
+        "type": "object"
+    }
+
+
+** Parameters file **
+
+"parameters": {
+    "DeploymentParameters": {
+      "value": {
+        "keyVault": {
+          "resourceGroupName": "RG-UHB-UKS-NOT-Deployment",
+          "namePrefix": "tredepkv"
+        },
+        "storageAccount": {
+          "resourceGroupName": "RG-UHB-UKS-NOT-Deployment",
+          "namePrefix": "tredepart"
+        }
+      }
+    },
+
+** Using object parameter in variable **
+
+"variables": {           
+    "keyVaultResourceGroupName": "[parameters('DeploymentParameters').keyVault.resourceGroupName]",
+    "keyVaultNamePrefix": "[parameters('DeploymentParameters').keyVault.namePrefix]",
+    "keyVaultName": "[concat(variables('keyVaultNamePrefix'), uniqueString(subscription().subscriptionId))]",
+    "keyVaultResourceId": "[concat('/subscriptions/', subscription().subscriptionId, '/resourcegroups/', variables('keyVaultResourceGroupName'), '/providers/Microsoft.KeyVault/vaults/', variables('keyVaultName'))]",
+
+** Using variables from object parameter **
+
+"resources": [
+    {
+        "type": "Microsoft.Resources/deployments",
+        "apiVersion": "2020-06-01",
+        "name": "[variables('keyvaultname')]",
+        "properties": {

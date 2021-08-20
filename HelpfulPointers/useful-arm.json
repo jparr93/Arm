@@ -1,0 +1,12 @@
+** Commenting on a resource or deployment **
+
+"resources": [
+    {
+        "comments": "** NETWORK INTERFACE RESOURCES **",
+        "name": "[variables('networkInterfaceNames')[copyIndex('networkInterfaceCardCopy')]]",
+        "type": "Microsoft.Network/networkInterfaces",
+        "apiVersion": "2019-07-01",
+        "location": "[resourceGroup().location]",
+
+
+ 

@@ -1,0 +1,59 @@
+** When using a child resource **
+    ** NOTE: THE TYPE OF RESOURCE - IN THIS EXAMPLE, FAILOVER GROUPS **
+
+"resources": [
+    {
+      "type": "Microsoft.Sql/servers",
+      "name": "mySqlServer",
+      "resources": [
+        {
+          "type": "failoverGroups",
+          "name": "myFailoverGroup"
+        }
+      ]
+    }
+]
+
+** Both of the resources above as a parent resource **
+    ** NOTE: THE TYPE OF RESOURCE - IN THIS EXAMPLE, FAILOVER GROUPS **
+
+"resources": [
+    {
+      "type": "Microsoft.Sql/servers",
+      "name": "mySqlServer",
+    },
+    {
+        "type": "Microsoft.Sql/servers/failoverGroups",
+        "name": "[concat('mySqlServer', '/', 'myFailoverGroup')]"
+    }
+]
+
+** Naming when child resource is outside of parent **
+    ** NOTE: THE NAME OF THE SUBNET RESOURCE **
+
+"resources": [
+    {
+      "type": "Microsoft.Network/virtualNetworks",
+      "apiVersion": "2018-10-01",
+      "name": "VNet1",
+      "location": "[parameters('location')]",
+      "properties": {
+        "addressSpace": {
+          "addressPrefixes": [
+            "10.0.0.0/16"
+          ]
+        }
+      }
+    },
+    {
+      "type": "Microsoft.Network/virtualNetworks/subnets",
+      "apiVersion": "2018-10-01",
+      "name": "VNet1/Subnet1",
+      "dependsOn": [
+        "VNet1"
+      ],
+      "properties": {
+        "addressPrefix": "10.0.0.0/24"
+      }
+    }
+  ]

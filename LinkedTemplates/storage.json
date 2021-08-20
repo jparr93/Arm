@@ -3,12 +3,10 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "name": {
-            "defaultValue": "jpizzletest2212",
             "type": "String"
         },
 
         "location": {
-            "defaultValue": "uksouth",
             "type": "String"
         }
     },

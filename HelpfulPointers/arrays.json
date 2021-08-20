@@ -1,0 +1,39 @@
+** template file **
+
+"subnets": {
+    "type": "array"
+  },
+
+** parameters file **
+
+"parameters": {
+    "subnets": {
+        "value": [
+            {
+                "name": "subnet1",
+                "prefix": "10.0.1.0/24"
+            },
+            {
+                "name": "subnet2",
+                "prefix": "10.0.2.0/24"
+            }
+        ]
+    },
+
+** usage in template file **
+
+"type": "Microsoft.Network/virtualNetworks/subnets",
+      "apiVersion": "2020-05-01",
+      "name": "[concat (parameters('networkparameters').virtualnetwork.virtualnetworkname,'/',parameters('subnets')[copyIndex('subnets')].name)]",
+      "location": "[parameters('location')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/virtualNetworks', parameters('networkparameters').virtualnetwork.virtualnetworkname)]"
+      ],
+      "properties": {
+        "addressPrefix": "[concat(parameters('subnets')[copyIndex('subnets')].prefix)]"
+      },
+      "copy": {
+        "name": "subnets",
+        "count": "[length(parameters('subnets'))]"
+      }
+    },

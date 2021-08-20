@@ -1,0 +1,124 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "storageAccounts_prefix": {
+            "type": "String"
+        },
+
+        "storageAccounts_location": {
+            "type": "String"
+        },
+
+        "networkSecurityGroupRules1": {
+            "type": "array"
+        },
+        "networkparameters": {
+            "type": "object"
+        },
+        "subnets": {
+            "type": "array"
+        },
+        "managedidentityname" : {
+            "type" : "string"
+        },
+        "location": {
+            "type": "string",
+            "defaultValue": "[resourceGroup().location]",
+            "metadata": {
+                "description": "Location for all resources."
+            }
+        }
+    },
+    "variables": {
+        "vnetname": "[concat(parameters('networkparameters').virtualnetwork.virtualnetworkname)]",
+        "netsecuregroupname": "[parameters('networkparameters').networkSecurityGroup.nsgname]",
+        "storageaccountname": "[concat(parameters('storageAccounts_prefix'), uniqueString(resourceGroup().id))]",
+        "linkedtemplateuri": "https://raw.githubusercontent.com/jparr93/Public/master/LinkedTemplates/"
+
+    },
+    "resources": [
+        {
+            "type": "Microsoft.Network/networkSecurityGroups",
+            "apiVersion": "2018-03-01",
+            "name": "[variables ('netsecuregroupname')]",
+            "location": "[resourceGroup().location]",
+            "properties": {
+                "securityRules": "[parameters('networkSecurityGroupRules1')]"
+            }
+        },
+        {
+            "type": "Microsoft.Network/virtualNetworks",
+            "apiVersion": "2020-05-01",
+            "name": "[variables ('vnetname')]",
+            "location": "[parameters('location')]",
+            "properties": {
+                "addressSpace": {
+                    "addressPrefixes": [
+                        "[parameters('networkparameters').virtualnetwork.virtualnetworkprefix]"
+                    ]
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Network/virtualNetworks/subnets",
+            "apiVersion": "2020-05-01",
+            "name": "[concat (variables ('vnetname'),'/',parameters('subnets')[copyIndex('subnets')].name)]",
+            "location": "[parameters('location')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/virtualNetworks', variables ('vnetname'))]"
+            ],
+            "properties": {
+                "addressPrefix": "[concat(parameters('subnets')[copyIndex('subnets')].prefix)]",
+                "networkSecurityGroup": {
+                    "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables ('netsecuregroupname'))]"
+                }
+            },
+            "copy": {
+                "name": "subnets",
+                "count": "[length(parameters('subnets'))]"
+            }
+        },
+        {
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2017-08-01",
+            "name": "deploy-storage-account-linked-template",
+            "dependsOn": [],
+
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[concat (variables('linkedtemplateuri'), 'storage.json')]"
+                },
+                "parameters": {
+                    "name": {
+                        "value": "[variables('storageaccountname')]"
+                    },
+                    "location": {
+                        "value": "[parameters ('storageAccounts_location')]"
+                    }
+                }
+
+            }
+        },
+         {
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2017-08-01",
+            "name": "deploy-managed-identity-linked-template",
+            "dependsOn": [],
+
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[concat (variables('linkedtemplateuri'), 'identity.json')]"
+                },
+                "parameters": {
+                    "name": {
+                        "value": "[concat (parameters('managedidentityname'), uniqueString(resourceGroup().id))]"
+                    }
+                }
+
+            }
+        }
+    ]
+}

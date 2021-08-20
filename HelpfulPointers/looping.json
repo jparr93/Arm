@@ -1,0 +1,72 @@
+** Parameters in template **
+
+** NOTE: CANNOT USE THIS IN CHILD RESOURCES, MUST BE A PARENT RESOURCE **
+
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "subnets": {
+            "type": "array"
+          },
+    
+** Parameter file **
+
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "subnets": {
+            "value": [
+                {
+                    "name": "subnet1",
+                    "prefix": "10.0.1.0/24"
+                },
+                {
+                    "name": "subnet2",
+                    "prefix": "10.0.2.0/24"
+                }
+            ]
+        },
+
+** How it is used in template **
+
+       {
+            "type": "Microsoft.Network/virtualNetworks/subnets",
+            "apiVersion": "2020-05-01",
+            "name": "[concat (parameters('networkparameters').virtualnetwork.virtualnetworkname,'/',parameters('subnets')[copyIndex('subnets')].name)]",
+            "location": "[parameters('location')]",
+            "dependsOn": [
+              "[resourceId('Microsoft.Network/virtualNetworks', parameters('networkparameters').virtualnetwork.virtualnetworkname)]"
+            ],
+            "properties": {
+              "addressPrefix": "[concat(parameters('subnets')[copyIndex('subnets')].prefix)]"
+            },
+            "copy": {
+              "name": "subnets",
+              "count": "[length(parameters('subnets'))]"
+            }
+          },
+
+** Looping example number 2 **
+
+"variables": {
+    "secondaryServers" : ["mySecondary1", "mySecondary2"]
+},
+"resources": [
+    {
+        "type": "Microsoft.Sql/servers/failoverGroups",
+        "name": "[concat(parameters('sqlServerPrimaryName'), '/', parameters('sqlFailoverGroupName'))]",
+        "properties": {
+            "copy": [
+                {
+                    "name": "partnerServers",
+                    "count": "[length(variables('secondaryServers')]",
+                    "input": {
+                        "id" : "[resourceId('Microsoft.Sql/servers/', variables('secondaryServers')[copyIndex('partnerServers')])]"
+                    }
+                }
+            ]
+        }
+    }
+]
