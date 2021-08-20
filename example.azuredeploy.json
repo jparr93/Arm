@@ -76,7 +76,9 @@
             },
             "copy": {
                 "name": "subnets",
-                "count": "[length(parameters('subnets'))]"
+                "count": "[length(parameters('subnets'))]",
+                "mode" : "Serial",
+                "batchsize" : 1
             }
         },
         {
