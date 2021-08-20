@@ -13,9 +13,6 @@
         "networkSecurityGroupRules1": {
             "type": "array"
         },
-        "adminpassword" : {
-            "type" : "securestring"
-        },
         "networkparameters": {
             "type": "object"
         },
