@@ -128,7 +128,7 @@
             "apiVersion": "2017-08-01",
             "name": "deploy-windows-vm-linked-template",
             "dependsOn":[
-                "['subnets']"
+                "subnets"
     ],
         
 
