@@ -23,12 +23,6 @@
                 "description": "Administrator Username for the local admin account"
             }
         },
-        "virtualMachineAdminPassword": {
-            "type": "securestring",
-            "metadata": {
-                "description": "Administrator password for the local admin account"
-            }
-        },
         "virtualNetworkName": {
             "type": "string",
             "metadata": {
@@ -107,7 +101,6 @@
             "name": "[parameters('vmName')]",
             "location": "[parameters('location')]",
             "dependsOn": [
-                "[resourceId('Microsoft.Storage/storageAccounts/', variables('storageAccountName'))]",
                 "[resourceId('Microsoft.Network/networkInterfaces/', variables('nicName'))]"
             ],
             "properties": {
@@ -117,7 +110,7 @@
                 "osProfile": {
                     "computerName": "[parameters('vmName')]",
                     "adminUsername": "[parameters('virtualMachineAdminUserName')]",
-                    "adminPassword": "[parameters('virtualMachineAdminPassword')]"
+                    "adminPassword": "ForestNott123!!"
                 },
                 "storageProfile": {
                     "imageReference": {
