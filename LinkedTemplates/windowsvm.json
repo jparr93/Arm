@@ -3,7 +3,7 @@
     "contentVersion": "1.0.1.0",
     "parameters": {
         "location": {
-            "defaultValue": "southcentralus",
+            "defaultValue": "uksouth",
             "type": "string",
             "metadata": {
                 "description": "Location for the VM resources"
