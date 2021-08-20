@@ -62,10 +62,10 @@
         },
         "virtualMachineSize": {
             "type": "string",
-            "defaultValue": "Standard_DS2_v2",
+            "defaultValue": "Standard_A1_v2",
             "allowedValues": [
                 "Standard_DS2_v2",
-                "Standard_M8-2ms",
+                "Standard_A1_v2",
                 "Standard_M8-4ms"
             ],
             "metadata": {
