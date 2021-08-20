@@ -73,7 +73,7 @@
     "variables": {
         "nicName": "[concat('vmNIC-',parameters('vmName'))]",
         "vnetID": "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
-        "subnetRef": "[concat(variables('vnetID'),'/subnets/', parameters('subnetName'))]",
+        "subnetRef": "[concat(variables('vnetID'),'/subnets/', parameters('subnetName'))]"
     },
     "resources": [
         {
