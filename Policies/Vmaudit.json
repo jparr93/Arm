@@ -1,0 +1,30 @@
+{
+    "properties": {
+        "displayName": "Vmauditdiagstuff",
+        "description": "audit vm diag stuff"
+    },
+"policyRule": {
+    "if": {
+      "field": "type",
+      "in": "Microsoft.Compute/virtualMachines"
+    },
+    "then": {
+      "effect": "AuditIfNotExists",
+      "details": {
+        "type": "Microsoft.Insights/diagnosticSettings",
+        "existenceCondition": {
+          "allOf": [
+            {
+              "field": "Microsoft.Insights/diagnosticSettings/logs.enabled",
+              "equals": "true"
+            },
+            {
+              "field": "Microsoft.Insights/diagnosticSettings/metrics.enabled",
+              "equals": "true"
+            }
+          ]
+        }
+      }
+    }
+}
+}

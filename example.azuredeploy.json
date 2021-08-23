@@ -80,7 +80,7 @@
                 "mode": "Serial",
                 "batchsize": 1
             }
-           
+
         },
         {
             "type": "Microsoft.Resources/deployments",
@@ -127,10 +127,8 @@
             "type": "Microsoft.Resources/deployments",
             "apiVersion": "2017-08-01",
             "name": "deploy-windows-vm-linked-template",
-            "dependsOn":[
-                "subnets"
-    ],
-        
+            "dependsOn": [ "subnets" ],
+
 
             "properties": {
                 "mode": "Incremental",
