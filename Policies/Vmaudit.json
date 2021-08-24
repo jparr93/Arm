@@ -1,12 +1,12 @@
 {
-    "properties": {
         "displayName": "Vmauditdiagstuff",
-        "description": "audit vm diag stuff"
-    },
+        "policytype" : "Custom",
+        "mode": "Indexed",
+        "description": "audit vm diag stuff",
 "policyRule": {
     "if": {
       "field": "type",
-      "in": "Microsoft.Compute/virtualMachines"
+      "equals": "Microsoft.Compute/virtualMachines"
     },
     "then": {
       "effect": "AuditIfNotExists",
