@@ -1,0 +1,38 @@
+{
+ "properties": {
+  "displayName": "Audit VMs",
+  "policyType": "Custom",
+  "metadata": {
+   "category": "Compute",
+   "createdBy": "48d9af5a-e9d7-49bf-946f-bc1aa8c3b1fb",
+   "createdOn": "2021-08-31T13:22:21.1820585Z",
+   "updatedBy": null,
+   "updatedOn": null
+  },
+  "parameters": {},
+  "policyDefinitions": [
+   {
+    "policyDefinitionReferenceId": "vm-audit-diagnostics_1",
+    "policyDefinitionId": "/subscriptions/3fcee2cc-1758-46d1-b7b7-d9d3f031c9b1/providers/Microsoft.Authorization/policyDefinitions/vm-audit-diagnostics",
+    "parameters": {},
+    "groupNames": []
+   },
+   {
+    "policyDefinitionReferenceId": "vm-disk-sku-premium_1",
+    "policyDefinitionId": "/subscriptions/3fcee2cc-1758-46d1-b7b7-d9d3f031c9b1/providers/Microsoft.Authorization/policyDefinitions/vm-disk-sku-premium",
+    "parameters": {},
+    "groupNames": []
+   },
+   {
+    "policyDefinitionReferenceId": "vm-osdisk-encryption_1",
+    "policyDefinitionId": "/subscriptions/3fcee2cc-1758-46d1-b7b7-d9d3f031c9b1/providers/Microsoft.Authorization/policyDefinitions/vm-osdisk-encryption",
+    "parameters": {},
+    "groupNames": []
+   }
+  ],
+  "policyDefinitionGroups": []
+ },
+ "id": "/subscriptions/3fcee2cc-1758-46d1-b7b7-d9d3f031c9b1/providers/Microsoft.Authorization/policySetDefinitions/dceaffee90074420a01a33c7",
+ "type": "Microsoft.Authorization/policySetDefinitions",
+ "name": "dceaffee90074420a01a33c7"
+}
