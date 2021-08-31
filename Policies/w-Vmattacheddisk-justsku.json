@@ -1,0 +1,26 @@
+{
+    "displayName": "Vmattacheddisksku-justsku",
+    "policytype": "Custom",
+    "mode": "Indexed",
+    "description": "Audit attached disks for VM",
+    "policyRule": {
+        "if": {
+            "field": "type",
+            "equals": "Microsoft.Compute/virtualMachines"
+        },
+        "then": {
+            "effect": "AuditIfNotExists",
+            "details": {
+                "type": "Microsoft.Compute/disks",
+                "existenceCondition": {
+                    "allOf": [
+                        {
+                            "field": "Microsoft.Compute/disks/sku.tier",
+                            "equals": "Premium"
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}
