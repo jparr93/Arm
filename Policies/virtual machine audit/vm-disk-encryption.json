@@ -1,5 +1,5 @@
 {
-    "displayName": "Vmattacheddisksku-simplified",
+    "displayName": "Vmattacheddisksku",
     "policytype": "Custom",
     "mode": "Indexed",
     "description": "Audit attached disks for VM",
@@ -13,14 +13,14 @@
             "details": {
                 "type": "Microsoft.Compute/disks",
                 "existenceCondition": {
-                    "allOf": [
+                    "anyOf": [
                         {
-                            "field": "Microsoft.Compute/disks/sku.tier",
-                            "equals": "Premium"
+                            "field": "Microsoft.Compute/disks/encryption.type",
+                            "equals": "EncryptionAtRestWithPlatformKey"
                         },
                         {
-                            "field": "Microsoft.Compute/disks/encryption",
-                            "equals": "true"
+                            "field": "Microsoft.Compute/disks/encryption.diskEncryptionSetId",
+                            "notequals": ""
                         }
                     ]
                 }

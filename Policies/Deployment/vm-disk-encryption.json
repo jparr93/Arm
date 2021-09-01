@@ -1,0 +1,37 @@
+{
+    "policyName": "audit-virtual-machines-disk-encryption-policy",
+    "properties": {
+        "displayName": "Audit Virtual Machine Disk Encryption (Custom)",
+        "policyType": "Custom",
+        "description": "This policy audits virtual machines to see whether it has disk encryption enabled on attached disks.",
+        "metadata": {
+            "category": "compute"
+        },
+        "mode": "All",
+        "parameters": {},
+        "policyRule": {
+            "if": {
+                "field": "type",
+                "equals": "Microsoft.Compute/virtualMachines"
+            },
+            "then": {
+                "effect": "AuditIfNotExists",
+                "details": {
+                    "type": "Microsoft.Compute/disks",
+                    "existenceCondition": {
+                        "anyOf": [
+                            {
+                                "field": "Microsoft.Compute/disks/encryption.type",
+                                "equals": "EncryptionAtRestWithPlatformKey"
+                            },
+                            {
+                                "field": "Microsoft.Compute/disks/encryption.diskEncryptionSetId",
+                                "notequals": ""
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    }
+}

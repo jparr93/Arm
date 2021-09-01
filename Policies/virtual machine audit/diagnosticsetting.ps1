@@ -1,0 +1,3 @@
+Set-AzDiagnosticSetting -Name vm-diagnostics -ResourceId "/subscriptions/3fcee2cc-1758-46d1-b7b7-d9d3f031c9b1/resourceGroups/rg-ad/providers/Microsoft.Compute/virtualMachines/vm3"
+ -Enabled $true -MetricCategory AllMetrics`
+ -workspaceId "/subscriptions/3fcee2cc-1758-46d1-b7b7-d9d3f031c9b1/resourceGroups/DefaultResourceGroup-EUS/providers/Microsoft.OperationalInsights/workspaces/DefaultWorkspace-3fcee2cc-1758-46d1-b7b7-d9d3f031c9b1-EUS"

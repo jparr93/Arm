@@ -3,6 +3,8 @@
     "policytype": "Custom",
     "mode": "Indexed",
     "description": "Audit attached disks for VM",
+    
+    
     "policyRule": {
         "if": {
             "field": "type",
@@ -24,3 +26,4 @@
         }
     }
 }
+

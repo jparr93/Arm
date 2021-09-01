@@ -1,0 +1,46 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "AzureInitiatives": {
+            "value": {
+                "definitions": [
+                    {
+                        "policyName": "VM Audit Diagnostics Arm",
+                        "properties": {
+                            "displayName": "Vmauditdiagstuff",
+                            "policytype": "Custom",
+                            "mode": "Indexed",
+                            "description": "audit vm diag stuff",
+                            "policyRule": {
+                                "if": {
+                                    "field": "type",
+                                    "equals": "Microsoft.Compute/virtualMachines"
+                                },
+                                "then": {
+                                    "effect": "AuditIfNotExists",
+                                    "details": {
+                                        "type": "Microsoft.Insights/diagnosticSettings",
+                                        "existenceCondition": {
+                                            "allOf": [
+                                                {
+                                                    "field": "Microsoft.Insights/diagnosticSettings/logs.enabled",
+                                                    "equals": "true"
+                                                },
+                                                {
+                                                    "field": "Microsoft.Insights/diagnosticSettings/metrics.enabled",
+                                                    "equals": "true"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    
+                ]
+            }
+        }
+    }
+}

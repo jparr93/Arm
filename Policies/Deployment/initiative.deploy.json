@@ -1,0 +1,71 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2018-05-01/subscriptionDeploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters" : {
+        "Definitions": {
+            "type": "array"
+        }
+    },
+      "variables": {
+        "policySetName": "ARM Assign Audit VM - Diag,Encrypt and Disk Skus",
+        "policySetDisplayName": "Audit Virtual Machine diagnostics, encryption and disk skus",
+        "policySetDescription": "This policy initiative is for vm auditing.",
+        "policyDefinitionFordiskencryption": "vm-osdisk-encryption",
+        "policyDefinitionFordiagnosticsettings": "vm-audit-diagnostics",
+        "policyDefinitionFordisksku": "vm-disk-sku-premium"
+
+    },
+    "resources": [
+         {
+            "type": "Microsoft.Authorization/policyDefinitions",
+            "name": "[parameters('definitions')[copyIndex('definitions')].policyName]",
+            "apiVersion": "2019-09-01",
+            "properties": "[parameters('definitions')[copyIndex('definitions')].properties]",
+            "copy": {
+                "name": "definitions",
+                "count": "[length(parameters('definitions'))]"
+            }
+        },
+        {
+            "type": "Microsoft.Authorization/policySetDefinitions",
+            "apiVersion": "2019-09-01",
+            "name": "[variables('policySetName')]",
+            "properties": {
+                "displayName": "[variables('policySetDisplayName')]",
+                "description": "[variables('policySetDescription')]",
+                "policyType": "Custom",
+                "metadata": {
+                    "category": "Tags"
+                },
+                "parameters": {},
+                "policyDefinitions": [
+                    {
+                        "policyDefinitionId": "[concat(subscription().id, '/providers/Microsoft.Authorization/policyDefinitions/', variables('policyDefinitionFordiskencryption'))]",
+                        "policyDefinitionReferenceId": "variables('policyDefinitionFordiskencryption')",
+                        "parameters": {}
+                    },
+                    {
+                        "policyDefinitionId": "[concat(subscription().id, '/providers/Microsoft.Authorization/policyDefinitions/', variables('policyDefinitionFordiagnosticsettings'))]",
+                        "policyDefinitionReferenceId": "variables('policyDefinitionFordiagnosticsettings')",
+                        "parameters": {}
+                    },
+                    {
+                        "policyDefinitionId": "[concat(subscription().id, '/providers/Microsoft.Authorization/policyDefinitions/', variables('policyDefinitionFordisksku'))]",
+                        "policyDefinitionReferenceId": "variables('policyDefinitionFordisksku')",
+                        "parameters": {}
+                    }
+                ]
+            }
+        },
+            {
+      "type": "Microsoft.Authorization/policyAssignments",
+      "name": "Assigning audit vms",
+      "apiVersion": "2019-09-01",
+      "properties": {
+        "scope": "[subscription().id]",
+        "policyDefinitionId": "[concat(subscription().id, '/providers/Microsoft.Authorization/policySetDefinitions/', variables('policySetName'))]"
+      },
+      "dependsOn" : ["[resourceId('Microsoft.Authorization/policySetDefinitions', variables('policySetName'))]"]
+    }
+    ]
+}

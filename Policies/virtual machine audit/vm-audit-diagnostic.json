@@ -6,7 +6,7 @@
 "policyRule": {
     "if": {
       "field": "type",
-      "equals": "Microsoft.Compute/virtualMachines/extensions"
+      "equals": "Microsoft.Compute/virtualMachines"
     },
     "then": {
       "effect": "AuditIfNotExists",

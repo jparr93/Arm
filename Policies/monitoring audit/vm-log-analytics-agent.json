@@ -1,0 +1,35 @@
+{
+    "displayName": "vmloganalyticsagentinstalled",
+    "policytype": "Custom",
+    "mode": "Indexed",
+    "description": "log analytics agent installed on vm",
+    "policyRule": {
+        "if": {
+            "field": "type",
+            "equals": "Microsoft.Compute/virtualMachines"
+        },
+        "then": {
+            "effect": "auditIfNotExists",
+            "details": {
+                "type": "Microsoft.Compute/virtualMachines/extensions",
+                "roleDefinitionIds": [],
+                "existenceCondition": {
+                    "allOf": [
+                        {
+                            "field": "Microsoft.Compute/virtualMachines/extensions/type",
+                            "equals": "MicrosoftMonitoringAgent"
+                        },
+                        {
+                            "field": "Microsoft.Compute/virtualMachines/extensions/publisher",
+                            "equals": "Microsoft.EnterpriseCloud.Monitoring"
+                        },
+                        {
+                            "field": "Microsoft.Compute/virtualMachines/extensions/provisioningState",
+                            "equals": "Succeeded"
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}

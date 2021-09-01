@@ -1,0 +1,37 @@
+{
+  "policyName": "audit-virtual-machines-diagnostic-policy",
+  "properties": {
+    "displayName": "Audit Virtual Machine Diagnostics (Custom)",
+    "policyType": "Custom",
+    "description": "This policy audits virtual machines to see whether diagnostics has been enabled.",
+    "metadata": {
+      "category": "diagnostics"
+    },
+    "mode": "All",
+    "parameters": {},
+    "policyRule": {
+      "if": {
+        "field": "type",
+        "equals": "Microsoft.Compute/virtualMachines"
+      },
+      "then": {
+        "effect": "AuditIfNotExists",
+        "details": {
+          "type": "Microsoft.Insights/diagnosticSettings",
+          "existenceCondition": {
+            "allOf": [
+              {
+                "field": "Microsoft.Insights/diagnosticSettings/logs.enabled",
+                "equals": "true"
+              },
+              {
+                "field": "Microsoft.Insights/diagnosticSettings/metrics.enabled",
+                "equals": "true"
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

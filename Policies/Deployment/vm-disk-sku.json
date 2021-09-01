@@ -1,0 +1,33 @@
+{
+    "policyName": "audit-virtual-machines-attached-disk-policy",
+    "properties": {
+        "displayName": "Audit Virtual Machine Attached Disks (Custom)",
+        "policyType": "Custom",
+        "description": "This policy audits virtual machines to check whether its attached disks are of premium sku.",
+        "metadata": {
+            "category": "compute"
+        },
+        "mode": "All",
+        "parameters": {},
+        "policyRule": {
+            "if": {
+                "field": "type",
+                "equals": "Microsoft.Compute/virtualMachines"
+            },
+            "then": {
+                "effect": "AuditIfNotExists",
+                "details": {
+                    "type": "Microsoft.Compute/disks",
+                    "existenceCondition": {
+                        "allOf": [
+                            {
+                                "field": "Microsoft.Compute/disks/sku.tier",
+                                "equals": "Premium"
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,29 @@
+{
+    "policySetName": "Audit Policy for Azure Virtual Machines (Custom)",
+    "properties": {
+        "displayName": "Audit Policy for Azure Virtual Machines (Custom)",
+        "description": "Controls compliance for Virtual Machines.",
+        "policyType": "Custom",
+        "metadata": {
+            "category": "Compute"
+        },
+        "parameters": {},
+        "policyDefinitions": [
+            {
+                "policyDefinitionId": "/subscriptions/abe2f1ed-4e2a-44bc-9bd5-13a1ce863b4d/providers/Microsoft.Authorization/policyDefinitions/audit-virtual-machines-disk-encryption-policy",
+                "policyDefinitionReferenceId": "Azure_VM_Disk_Encryption_Auditing",
+                "parameters": {}
+            },
+            {
+                "policyDefinitionId": "/subscriptions/abe2f1ed-4e2a-44bc-9bd5-13a1ce863b4d/providers/Microsoft.Authorization/policyDefinitions/audit-virtual-machines-attached-disk-policy",
+                "policyDefinitionReferenceId": "Azure_VM_Attached_Disk_Auditing",
+                "parameters": {}
+            },
+            {
+                "policyDefinitionId": "/subscriptions/abe2f1ed-4e2a-44bc-9bd5-13a1ce863b4d/providers/Microsoft.Authorization/policyDefinitions/audit-virtual-machines-diagnostic-policy",
+                "policyDefinitionReferenceId": "Azure_VM_Diagnostic_Auditing",
+                "parameters": {}
+            }
+        ]
+    }
+}

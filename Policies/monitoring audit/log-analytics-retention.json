@@ -1,0 +1,27 @@
+{
+    "displayName": "vmloganalyticsretention",
+    "policytype": "Custom",
+    "mode": "Indexed",
+    "description": "log analytics retention",
+    "policyRule": {
+        "if": {
+            "field": "type",
+            "equals": "Microsoft.OperationalInsights/workspaces"
+        },
+        "then": {
+            "effect": "auditIfNotExists",
+            "details": {
+                "type": "Microsoft.OperationalInsights/workspaces",
+                "roleDefinitionIds": [],
+                "existenceCondition": {
+                    "allOf": [
+                        {
+                            "field": "Microsoft.OperationalInsights/workspaces/retentionInDays",
+                            "equals": "365"
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}
