@@ -1,0 +1,63 @@
+{
+    "displayName": "MessagingDiagnosticSettings",
+    "policytype": "Custom",
+    "mode": "All",
+    "description": "Messaging audit diagnostic settings",
+    "policyRule": {
+        "if": {
+            "anyof": [
+                {
+                    "field": "type",
+                    "equals": "Microsoft.Batch/batchAccounts"
+                },
+                {
+                    "field": "type",
+                    "equals": "Microsoft.EventGrid/eventSubscriptions"
+                },
+                {
+                    "field": "type",
+                    "equals": "Microsoft.EventGrid/topics"
+                },
+                {
+                    "field": "type",
+                    "equals": "Microsoft.Search/searchServices"
+                },
+                {
+                    "field": "type",
+                    "equals": "Microsoft.ServiceBus/namespaces"
+                },
+                {
+                    "field": "type",
+                    "equals": "Microsoft.EventHub/namespaces"
+                }
+            ]
+        },
+        "then": {
+            "effect": "auditIfNotExists",
+            "details": {
+                "type": "Microsoft.Insights/diagnosticSettings",
+                "roleDefinitionIds": [],
+                "existenceCondition": {
+                    "allOf": [
+                        {
+                            "field": "Microsoft.Insights/diagnosticSettings/metrics[*].retentionPolicy.days",
+                            "equals": "7"
+                        },
+                        {
+                            "field": "Microsoft.Insights/diagnosticSettings/logs[*].retentionPolicy.days",
+                            "equals": "7"
+                        },
+                        {
+                            "field": "Microsoft.Insights/diagnosticSettings/storageAccountId",
+                            "notequals": ""
+                        },
+                        {
+                            "field": "Microsoft.Insights/diagnosticSettings/workspaceId",
+                            "notequals": ""
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}

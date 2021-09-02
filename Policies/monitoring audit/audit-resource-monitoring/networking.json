@@ -1,0 +1,80 @@
+{
+    "displayName": "NetworkingDiagnosticSettings",
+    "policytype": "Custom",
+    "mode": "All",
+    "description": "Networking diagnostic settings",
+    "policyRule": {
+      "if": {
+        "anyof": [
+            {
+                "field": "type",
+                "equals": "Microsoft.Network/virtualNetworks"
+            },
+            {
+                "field": "type",
+                "equals": "Microsoft.Network/virtualNetworkGateways"
+            },
+            {
+                "field": "type",
+                "equals": "Microsoft.Network/trafficManagerProfiles"
+            },
+            {
+                "field": "type",
+                "equals": "Microsoft.Network/networkInterfaces"
+            },
+            {
+                "field": "type",
+                "equals": "Microsoft.Devices/IotHubs"
+            },
+            {
+                "field": "type",
+                "equals": "Microsoft.Network/networkSecurityGroups"
+            },
+            {
+                "field": "type",
+                "equals": "Microsoft.Network/loadBalancers"
+            },
+            {
+                "field": "type",
+                "equals": "Microsoft.Network/expressRouteCircuits"
+            },
+            {
+                "field": "type",
+                "equals": "Microsoft.Network/azureFirewalls"
+            },
+            {
+                "field": "type",
+                "equals": "Microsoft.Network/publicIPAddresses"
+            }
+        ]
+    },
+    "then": {
+      "effect": "auditIfNotExists",
+      "details": {
+        "type": "Microsoft.Insights/diagnosticSettings",
+        "roleDefinitionIds": [],
+                "existenceCondition": {
+                    "allOf": [
+                        {
+                            "field": "Microsoft.Insights/diagnosticSettings/metrics[*].retentionPolicy.days",
+                            "equals": "7"
+                        },
+                        {
+                            "field": "Microsoft.Insights/diagnosticSettings/logs[*].retentionPolicy.days",
+                            "equals": "7"
+                        },
+                        {
+                            "field": "Microsoft.Insights/diagnosticSettings/storageAccountId",
+                            "notequals": ""
+                        },
+                        {
+                            "field": "Microsoft.Insights/diagnosticSettings/workspaceId",
+                            "notequals": ""
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}
+

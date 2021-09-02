@@ -1,0 +1,56 @@
+{
+    "displayName": "AnalysisDiagnosticSettings",
+    "policytype": "Custom",
+    "mode": "All",
+    "description": "Analysis Audit diagnostic settings",
+    "policyRule": {
+        "if": {
+            "anyof": [
+                {
+                    "field": "type",
+                    "equals": "Microsoft.StreamAnalytics/streamingjobs"
+                },
+                {
+                    "field": "type",
+                    "equals": "Microsoft.TimeSeriesInsights/environments"
+                },
+                {
+                    "field": "type",
+                    "equals": "Microsoft.AnalysisServices/servers"
+                },
+                {
+                    "field": "type",
+                    "equals": "Microsoft.PowerBIDedicated/capacities"
+                }
+            ]
+        },
+    "then": {
+      "effect": "auditIfNotExists",
+      "details": {
+        "type": "Microsoft.Insights/diagnosticSettings",
+        "roleDefinitionIds": [],
+                "existenceCondition": {
+                    "allOf": [
+                        {
+                            "field": "Microsoft.Insights/diagnosticSettings/metrics[*].retentionPolicy.days",
+                            "equals": "7"
+                        },
+                        {
+                            "field": "Microsoft.Insights/diagnosticSettings/logs[*].retentionPolicy.days",
+                            "equals": "7"
+                        },
+                        {
+                            "field": "Microsoft.Insights/diagnosticSettings/storageAccountId",
+                            "notequals": ""
+                        },
+                        {
+                            "field": "Microsoft.Insights/diagnosticSettings/workspaceId",
+                            "notequals": ""
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}
+

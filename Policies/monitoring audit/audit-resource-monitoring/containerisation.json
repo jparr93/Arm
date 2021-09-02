@@ -1,0 +1,52 @@
+{
+    "displayName": "ContainerisationDiagnosticSettings",
+    "policytype": "Custom",
+    "mode": "All",
+    "description": "Containerisation Audit diagnostic settings",
+    "policyRule": {
+        "if": {
+            "anyof": [
+                {
+                    "field": "type",
+                    "equals": "Microsoft.ContainerInstance/containerGroups"
+                },
+                {
+                    "field": "type",
+                    "equals": "Microsoft.ContainerRegistry/registries"
+                },
+                {
+                    "field": "type",
+                    "equals": "Microsoft.ContainerService/managedClusters"
+                }
+            ]
+        },
+    "then": {
+      "effect": "auditIfNotExists",
+      "details": {
+        "type": "Microsoft.Insights/diagnosticSettings",
+        "roleDefinitionIds": [],
+                "existenceCondition": {
+                    "allOf": [
+                        {
+                            "field": "Microsoft.Insights/diagnosticSettings/metrics[*].retentionPolicy.days",
+                            "equals": "7"
+                        },
+                        {
+                            "field": "Microsoft.Insights/diagnosticSettings/logs[*].retentionPolicy.days",
+                            "equals": "7"
+                        },
+                        {
+                            "field": "Microsoft.Insights/diagnosticSettings/storageAccountId",
+                            "notequals": ""
+                        },
+                        {
+                            "field": "Microsoft.Insights/diagnosticSettings/workspaceId",
+                            "notequals": ""
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}
+
