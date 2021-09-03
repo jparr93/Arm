@@ -1,0 +1,60 @@
+{
+    "policyName": "identity-resources-diagnostic-setting-audit",
+    "properties": {
+        "displayName": "Audit diagnostic settings for identity based resources (Custom)",
+        "policyType": "Custom",
+        "mode": "All",
+        "description": "A policy to audit identity based resources diagnostic settings according to a predefined set of requirements as identified in the policy",
+        "parameters": {
+            "effect": {
+                "type": "String",
+                "metadata": {
+                    "displayName": "Effect",
+                    "description": "Enable or disable the execution of the policy"
+                },
+                "allowedValues": [
+                    "AuditIfNotExists",
+                    "Disabled"
+                ],
+                "defaultValue": "AuditIfNotExists"
+            }
+        },
+        "policyRule": {
+            "if": {
+                "anyof": [
+                    {
+                        "field": "type",
+                        "equals": "Microsoft.AAD/domainServices"
+                    }
+                ]
+            },
+            "then": {
+                "effect": "[parameters('effect')]",
+                "details": {
+                    "type": "Microsoft.Insights/diagnosticSettings",
+                    "roleDefinitionIds": [],
+                    "existenceCondition": {
+                        "allOf": [
+                            {
+                                "field": "Microsoft.Insights/diagnosticSettings/metrics[*].retentionPolicy.days",
+                                "equals": "7"
+                            },
+                            {
+                                "field": "Microsoft.Insights/diagnosticSettings/logs[*].retentionPolicy.days",
+                                "equals": "7"
+                            },
+                            {
+                                "field": "Microsoft.Insights/diagnosticSettings/storageAccountId",
+                                "notequals": ""
+                            },
+                            {
+                                "field": "Microsoft.Insights/diagnosticSettings/workspaceId",
+                                "notequals": ""
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    }
+}
