@@ -13,27 +13,44 @@
                 {
                     "field": "type",
                     "equals": "Microsoft.Compute/virtualMachineScaleSets"
+                },
+                {
+                    "field": "type",
+                    "equals": "Microsoft.DesktopVirtualization/workspaces"
+                },
+                {
+                    "field": "type",
+                    "equals": "Microsoft.DesktopVirtualization/applicationGroups"
+                },
+                {
+                    "field": "type",
+                    "equals": "Microsoft.DesktopVirtualization/hostPools"
                 }
+
             ]
         },
         "then": {
-            "effect": "auditIfNotExists",
+            "effect": "[parameters('effect')]",
             "details": {
                 "type": "Microsoft.Insights/diagnosticSettings",
                 "roleDefinitionIds": [],
                 "existenceCondition": {
-                    "allOf": [
+                    "anyOf": [
                         {
-                            "field": "Microsoft.Insights/diagnosticSettings/metrics[*].retentionPolicy.days",
-                            "equals": "7"
-                        },
-                        {
-                            "field": "Microsoft.Insights/diagnosticSettings/logs[*].retentionPolicy.days",
-                            "equals": "7"
-                        },
-                        {
-                            "field": "Microsoft.Insights/diagnosticSettings/storageAccountId",
-                            "notequals": ""
+                            "allOf": [
+                                {
+                                    "field": "Microsoft.Insights/diagnosticSettings/metrics[*].retentionPolicy.days",
+                                    "equals": "7"
+                                },
+                                {
+                                    "field": "Microsoft.Insights/diagnosticSettings/logs[*].retentionPolicy.days",
+                                    "equals": "7"
+                                },
+                                {
+                                    "field": "Microsoft.Insights/diagnosticSettings/storageAccountId",
+                                    "notequals": ""
+                                }
+                            ]
                         },
                         {
                             "field": "Microsoft.Insights/diagnosticSettings/workspaceId",

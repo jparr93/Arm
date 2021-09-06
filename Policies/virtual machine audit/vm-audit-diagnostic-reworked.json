@@ -1,0 +1,30 @@
+{
+        "displayName": "Vmauditdiagstuff",
+        "policytype" : "Custom",
+        "mode": "Indexed",
+        "description": "audit vm diag stuff",
+"policyRule": {
+    "if": {
+      "field": "type",
+      "equals": "Microsoft.Compute/virtualMachines"
+    },
+    "then": {
+      "effect": "AuditIfNotExists",
+      "details": {
+        "type": "Microsoft.Compute/virtualMachines/extensions",
+        "existenceCondition": {
+          "allOf": [
+            {
+              "field": "Microsoft.Compute/virtualMachines/extensions/publisher",
+              "equals": "Microsoft.Azure.Diagnostics"
+            },
+            {
+              "field": "Microsoft.Compute/virtualMachines/extensions/provisioningState",
+              "equals": "Succeeded"
+            }
+          ]
+        }
+      }
+    }
+}
+}

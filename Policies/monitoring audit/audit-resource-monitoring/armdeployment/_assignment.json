@@ -1,0 +1,16 @@
+{
+    "policyAssignmentsName": "Audit Policy for Monitoring (Custom)",
+    "policyAssignmentMode": "Default",
+    "policySetName": "Audit Policy for Monitoring (Custom)",
+    "parameters": {
+        "effect": {
+            "value": "AuditIfNotExists"
+        },
+        "tagName": {
+            "value": "Environment"
+        },
+        "tagValue": {
+            "value": "PROD"
+        }
+    }
+}

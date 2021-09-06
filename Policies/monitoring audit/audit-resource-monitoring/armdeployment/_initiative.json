@@ -1,0 +1,168 @@
+{
+    "policySetName": "Audit Policy for Monitoring (Custom)",
+    "properties": {
+        "displayName": "Audit Policy for Monitoring (Custom)",
+        "description": "Audits monitoring.",
+        "policyType": "Custom",
+        "parameters": {
+            "effect": {
+                "type": "string",
+                "metadata": {},
+                "allowedValues": [
+                    "AuditIfNotExists",
+                    "Disabled"
+                ]
+            },
+            "tagName": {
+                "type": "String",
+                "metadata": {
+                    "displayName": "Tag Name",
+                    "description": "Name of the tag, such as 'environment'"
+                },
+                "defaultValue": "Environment"
+            },
+            "tagValue": {
+                "type": "String",
+                "metadata": {
+                    "displayName": "Tag Value",
+                    "description": "Value of the tag, such as 'production'"                   
+                },
+                "defaultValue": "PROD"
+            }
+        },
+        "policyDefinitions": [
+            {
+                "policyDefinitionId": "/subscriptions/abe2f1ed-4e2a-44bc-9bd5-13a1ce863b4d/providers/Microsoft.Authorization/policyDefinitions/analysis-resources-diagnostic-setting-audit",
+                "policyDefinitionReferenceId": "Analysis_Resource_Diag",
+                "parameters": {
+                    "effect": {
+                        "value": "[parameters('effect')]"
+                    }
+                }
+            },
+            {
+                "policyDefinitionId": "/subscriptions/abe2f1ed-4e2a-44bc-9bd5-13a1ce863b4d/providers/Microsoft.Authorization/policyDefinitions/automation-resources-diagnostic-setting-audit",
+                "policyDefinitionReferenceId": "Automation_Resource_Diag",
+                "parameters": {
+                    "effect": {
+                        "value": "[parameters('effect')]"
+                    }
+                }
+            },
+            {
+                "policyDefinitionId": "/subscriptions/abe2f1ed-4e2a-44bc-9bd5-13a1ce863b4d/providers/Microsoft.Authorization/policyDefinitions/bigdata-resources-diagnostic-setting-audit",
+                "policyDefinitionReferenceId": "BigData_Resource_Diag",
+                "parameters": {
+                    "effect": {
+                        "value": "[parameters('effect')]"
+                    }
+                }
+            },
+            {
+                "policyDefinitionId": "/subscriptions/abe2f1ed-4e2a-44bc-9bd5-13a1ce863b4d/providers/Microsoft.Authorization/policyDefinitions/compute-resources-diagnostic-setting-audit",
+                "policyDefinitionReferenceId": "Compute_Resource_Diag",
+                "parameters": {
+                    "effect": {
+                        "value": "[parameters('effect')]"
+                    }
+                }
+            },
+            {
+                "policyDefinitionId": "/subscriptions/abe2f1ed-4e2a-44bc-9bd5-13a1ce863b4d/providers/Microsoft.Authorization/policyDefinitions/containerisation-resources-diagnostic-setting-audit",
+                "policyDefinitionReferenceId": "Containerisation_Resource_Diag",
+                "parameters": {
+                    "effect": {
+                        "value": "[parameters('effect')]"
+                    }
+                }
+            },
+            {
+                "policyDefinitionId": "/subscriptions/abe2f1ed-4e2a-44bc-9bd5-13a1ce863b4d/providers/Microsoft.Authorization/policyDefinitions/identity-resources-diagnostic-setting-audit",
+                "policyDefinitionReferenceId": "Identity_Resource_Diag",
+                "parameters": {
+                    "effect": {
+                        "value": "[parameters('effect')]"
+                    }
+                }
+            },
+            {
+                "policyDefinitionId": "/subscriptions/abe2f1ed-4e2a-44bc-9bd5-13a1ce863b4d/providers/Microsoft.Authorization/policyDefinitions/log-analytics-retention-audit",
+                "policyDefinitionReferenceId": "Log_Analytics_Resource_Diag",
+                "parameters": {
+                    "effect": {
+                        "value": "[parameters('effect')]"
+                    }
+                }
+            },
+            {
+                "policyDefinitionId": "/subscriptions/abe2f1ed-4e2a-44bc-9bd5-13a1ce863b4d/providers/Microsoft.Authorization/policyDefinitions/messaging-resources-diagnostic-setting-audit",
+                "policyDefinitionReferenceId": "Messaging_Resource_Diag",
+                "parameters": {
+                    "effect": {
+                        "value": "[parameters('effect')]"
+                    }
+                }
+            },
+            {
+                "policyDefinitionId": "/subscriptions/abe2f1ed-4e2a-44bc-9bd5-13a1ce863b4d/providers/Microsoft.Authorization/policyDefinitions/networking-resources-diagnostic-setting-audit",
+                "policyDefinitionReferenceId": "Networking_Resource_Diag",
+                "parameters": {
+                    "effect": {
+                        "value": "[parameters('effect')]"
+                    }
+                }
+            },
+            {
+                "policyDefinitionId": "/subscriptions/abe2f1ed-4e2a-44bc-9bd5-13a1ce863b4d/providers/Microsoft.Authorization/policyDefinitions/security-resources-diagnostic-setting-audit",
+                "policyDefinitionReferenceId": "Security_Resource_Diag",
+                "parameters": {
+                    "effect": {
+                        "value": "[parameters('effect')]"
+                    }
+                }
+            },
+            {
+                "policyDefinitionId": "/subscriptions/abe2f1ed-4e2a-44bc-9bd5-13a1ce863b4d/providers/Microsoft.Authorization/policyDefinitions/sql-resources-diagnostic-setting-audit",
+                "policyDefinitionReferenceId": "SQL_Resource_Diag",
+                "parameters": {
+                    "effect": {
+                        "value": "[parameters('effect')]"
+                    }
+                }
+            },
+            {
+                "policyDefinitionId": "/subscriptions/abe2f1ed-4e2a-44bc-9bd5-13a1ce863b4d/providers/Microsoft.Authorization/policyDefinitions/webapp-resources-diagnostic-setting-audit",
+                "policyDefinitionReferenceId": "Web_Resource_Diag",
+                "parameters": {
+                    "effect": {
+                        "value": "[parameters('effect')]"
+                    }
+                }
+            },
+            {
+                "policyDefinitionId": "/subscriptions/abe2f1ed-4e2a-44bc-9bd5-13a1ce863b4d/providers/Microsoft.Authorization/policyDefinitions/log-analytics-prod-retention-audit",
+                "policyDefinitionReferenceId": "Log_Analytics_PROD_Retention",
+                "parameters": {
+                    "effect": {
+                        "value": "[parameters('effect')]"
+                    },
+                    "tagName": {
+                        "value": "[parameters('tagName')]"
+                    },
+                    "tagValue": {
+                        "value": "[parameters('tagValue')]"
+                    }
+                }
+            },
+            {
+                "policyDefinitionId": "/subscriptions/abe2f1ed-4e2a-44bc-9bd5-13a1ce863b4d/providers/Microsoft.Authorization/policyDefinitions/virtual-machine-log-analytics-extension-install-audit",
+                "policyDefinitionReferenceId": "VM_Extension",
+                "parameters": {
+                    "effect": {
+                        "value": "[parameters('effect')]"
+                    }
+                }
+            }
+        ]
+    }
+}

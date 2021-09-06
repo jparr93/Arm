@@ -51,30 +51,34 @@
           "then": {
             "effect": "[parameters('effect')]",
             "details": {
-              "type": "Microsoft.Insights/diagnosticSettings",
-              "roleDefinitionIds": [],
-                      "existenceCondition": {
-                          "allOf": [
-                              {
-                                  "field": "Microsoft.Insights/diagnosticSettings/metrics[*].retentionPolicy.days",
-                                  "equals": "7"
-                              },
-                              {
-                                  "field": "Microsoft.Insights/diagnosticSettings/logs[*].retentionPolicy.days",
-                                  "equals": "7"
-                              },
-                              {
-                                  "field": "Microsoft.Insights/diagnosticSettings/storageAccountId",
-                                  "notequals": ""
-                              },
-                              {
-                                  "field": "Microsoft.Insights/diagnosticSettings/workspaceId",
-                                  "notequals": ""
-                              }
-                          ]
-                      }
-                  }
-              }
+                "type": "Microsoft.Insights/diagnosticSettings",
+                "roleDefinitionIds": [],
+                "existenceCondition": {
+                    "anyOf": [
+                        {
+                            "allOf": [
+                                {
+                                    "field": "Microsoft.Insights/diagnosticSettings/metrics[*].retentionPolicy.days",
+                                    "equals": "7"
+                                },
+                                {
+                                    "field": "Microsoft.Insights/diagnosticSettings/logs[*].retentionPolicy.days",
+                                    "equals": "7"
+                                },
+                                {
+                                    "field": "Microsoft.Insights/diagnosticSettings/storageAccountId",
+                                    "notequals": ""
+                                }
+                            ]
+                        },
+                        {
+                            "field": "Microsoft.Insights/diagnosticSettings/workspaceId",
+                            "notequals": ""
+                        }
+                    ]
+                }
+            }
+        }
           }
     }
 }

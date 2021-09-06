@@ -78,18 +78,22 @@
                     "type": "Microsoft.Insights/diagnosticSettings",
                     "roleDefinitionIds": [],
                     "existenceCondition": {
-                        "allOf": [
+                        "anyOf": [
                             {
-                                "field": "Microsoft.Insights/diagnosticSettings/metrics[*].retentionPolicy.days",
-                                "equals": "7"
-                            },
-                            {
-                                "field": "Microsoft.Insights/diagnosticSettings/logs[*].retentionPolicy.days",
-                                "equals": "7"
-                            },
-                            {
-                                "field": "Microsoft.Insights/diagnosticSettings/storageAccountId",
-                                "notequals": ""
+                                "allOf": [
+                                    {
+                                        "field": "Microsoft.Insights/diagnosticSettings/metrics[*].retentionPolicy.days",
+                                        "equals": "7"
+                                    },
+                                    {
+                                        "field": "Microsoft.Insights/diagnosticSettings/logs[*].retentionPolicy.days",
+                                        "equals": "7"
+                                    },
+                                    {
+                                        "field": "Microsoft.Insights/diagnosticSettings/storageAccountId",
+                                        "notequals": ""
+                                    }
+                                ]
                             },
                             {
                                 "field": "Microsoft.Insights/diagnosticSettings/workspaceId",

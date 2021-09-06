@@ -1,0 +1,52 @@
+{
+    "policyName": "virtual-machine-log-analytics-extension-install-audit",
+    "properties": {
+        "displayName": "Audit virtual machines to ensure log analytics agent installed (Custom)",
+        "policyType": "Custom",
+        "mode": "All",
+        "description": "A policy to audit virtual machines to ensure the log analytics agent is installed.",
+        "parameters": {
+            "effect": {
+                "type": "String",
+                "metadata": {
+                    "displayName": "Effect",
+                    "description": "Enable or disable the execution of the policy"
+                },
+                "allowedValues": [
+                    "AuditIfNotExists",
+                    "Disabled"
+                ],
+                "defaultValue": "AuditIfNotExists"
+            }
+        },
+        "policyRule": {
+            "if": {
+                "field": "type",
+                "equals": "Microsoft.Compute/virtualMachines"
+            },
+            "then": {
+                "effect": "[parameters('effect')]",
+                "details": {
+                    "type": "Microsoft.Compute/virtualMachines/extensions",
+                    "roleDefinitionIds": [],
+                    "existenceCondition": {
+                        "allOf": [
+                            {
+                                "field": "Microsoft.Compute/virtualMachines/extensions/type",
+                                "equals": "MicrosoftMonitoringAgent"
+                            },
+                            {
+                                "field": "Microsoft.Compute/virtualMachines/extensions/publisher",
+                                "equals": "Microsoft.EnterpriseCloud.Monitoring"
+                            },
+                            {
+                                "field": "Microsoft.Compute/virtualMachines/extensions/provisioningState",
+                                "equals": "Succeeded"
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    }
+}

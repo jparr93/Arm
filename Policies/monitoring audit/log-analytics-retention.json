@@ -2,14 +2,52 @@
     "displayName": "vmloganalyticsretention",
     "policytype": "Custom",
     "mode": "Indexed",
+    "parameters": {
+        "effect": {
+            "type": "String",
+            "metadata": {
+                "displayName": "Effect",
+                "description": "Enable or disable the execution of the policy"
+            },
+            "allowedValues": [
+                "AuditIfNotExists",
+                "Disabled"
+            ],
+            "defaultValue": "AuditIfNotExists"
+        },
+        "tagName": {
+            "type": "String",
+            "metadata": {
+                "displayName": "Tag Name",
+                "description": "Name of the tag, such as 'environment'"
+            },
+            "defaultValue": "Environment"
+        },
+        "tagValue": {
+            "type": "String",
+            "metadata": {
+                "displayName": "Tag Value",
+                "description": "Value of the tag, such as 'production'"                
+            },
+            "defaultValue": "PROD"
+        }
+    },
     "description": "log analytics retention",
     "policyRule": {
         "if": {
-            "field": "type",
-            "equals": "Microsoft.OperationalInsights/workspaces"
+            "allOf": [
+                {
+                    "field": "type",
+                    "equals": "Microsoft.OperationalInsights/workspaces"
+                },
+                {
+                    "field": "[concat('tags[', parameters('tagName'), ']')]",
+                    "Equals": "[parameters('tagValue')]"
+                }
+            ]
         },
         "then": {
-            "effect": "auditIfNotExists",
+            "effect": "[parameters('effect')]",
             "details": {
                 "type": "Microsoft.OperationalInsights/workspaces",
                 "roleDefinitionIds": [],
