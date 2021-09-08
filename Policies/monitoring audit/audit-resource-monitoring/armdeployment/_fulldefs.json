@@ -17,6 +17,14 @@
                     "Disabled"
                 ],
                 "defaultValue": "AuditIfNotExists"
+            },
+            "retention": {
+                "type": "String",
+                "metadata": {
+                    "displayName": "Retention",
+                    "description": "Specifies the retention of logs and metrics in days"
+                },
+                "defaultValue": "7"
             }
         },
         "policyRule": {
@@ -51,11 +59,11 @@
                                 "allOf": [
                                     {
                                         "field": "Microsoft.Insights/diagnosticSettings/metrics[*].retentionPolicy.days",
-                                        "equals": "7"
+                                        "equals": "[parameters('retention')]"
                                     },
                                     {
                                         "field": "Microsoft.Insights/diagnosticSettings/logs[*].retentionPolicy.days",
-                                        "equals": "7"
+                                        "equals": "[parameters('retention')]"
                                     },
                                     {
                                         "field": "Microsoft.Insights/diagnosticSettings/storageAccountId",
@@ -93,6 +101,14 @@
                     "Disabled"
                 ],
                 "defaultValue": "AuditIfNotExists"
+            },
+            "retention": {
+                "type": "String",
+                "metadata": {
+                    "displayName": "Retention",
+                    "description": "Specifies the retention of logs and metrics in days"
+                },
+                "defaultValue": "7"
             }
         },
         "policyRule": {
@@ -123,11 +139,11 @@
                                 "allOf": [
                                     {
                                         "field": "Microsoft.Insights/diagnosticSettings/metrics[*].retentionPolicy.days",
-                                        "equals": "7"
+                                        "equals": "[parameters('retention')]"
                                     },
                                     {
                                         "field": "Microsoft.Insights/diagnosticSettings/logs[*].retentionPolicy.days",
-                                        "equals": "7"
+                                        "equals": "[parameters('retention')]"
                                     },
                                     {
                                         "field": "Microsoft.Insights/diagnosticSettings/storageAccountId",
@@ -165,6 +181,14 @@
                     "Disabled"
                 ],
                 "defaultValue": "AuditIfNotExists"
+            },
+            "retention": {
+                "type": "String",
+                "metadata": {
+                    "displayName": "Retention",
+                    "description": "Specifies the retention of logs and metrics in days"
+                },
+                "defaultValue": "7"
             }
         },
         "policyRule": {
@@ -199,11 +223,11 @@
                                 "allOf": [
                                     {
                                         "field": "Microsoft.Insights/diagnosticSettings/metrics[*].retentionPolicy.days",
-                                        "equals": "7"
+                                        "equals": "[parameters('retention')]"
                                     },
                                     {
                                         "field": "Microsoft.Insights/diagnosticSettings/logs[*].retentionPolicy.days",
-                                        "equals": "7"
+                                        "equals": "[parameters('retention')]"
                                     },
                                     {
                                         "field": "Microsoft.Insights/diagnosticSettings/storageAccountId",
@@ -241,6 +265,14 @@
                     "Disabled"
                 ],
                 "defaultValue": "AuditIfNotExists"
+            },
+            "retention": {
+                "type": "String",
+                "metadata": {
+                    "displayName": "Retention",
+                    "description": "Specifies the retention of logs and metrics in days"
+                },
+                "defaultValue": "7"
             }
         },
         "policyRule": {
@@ -279,11 +311,11 @@
                                 "allOf": [
                                     {
                                         "field": "Microsoft.Insights/diagnosticSettings/metrics[*].retentionPolicy.days",
-                                        "equals": "7"
+                                        "equals": "[parameters('retention')]"
                                     },
                                     {
                                         "field": "Microsoft.Insights/diagnosticSettings/logs[*].retentionPolicy.days",
-                                        "equals": "7"
+                                        "equals": "[parameters('retention')]"
                                     },
                                     {
                                         "field": "Microsoft.Insights/diagnosticSettings/storageAccountId",
@@ -321,6 +353,14 @@
                     "Disabled"
                 ],
                 "defaultValue": "AuditIfNotExists"
+            },
+            "retention": {
+                "type": "String",
+                "metadata": {
+                    "displayName": "Retention",
+                    "description": "Specifies the retention of logs and metrics in days"
+                },
+                "defaultValue": "7"
             }
         },
         "policyRule": {
@@ -351,11 +391,11 @@
                                 "allOf": [
                                     {
                                         "field": "Microsoft.Insights/diagnosticSettings/metrics[*].retentionPolicy.days",
-                                        "equals": "7"
+                                        "equals": "[parameters('retention')]"
                                     },
                                     {
                                         "field": "Microsoft.Insights/diagnosticSettings/logs[*].retentionPolicy.days",
-                                        "equals": "7"
+                                        "equals": "[parameters('retention')]"
                                     },
                                     {
                                         "field": "Microsoft.Insights/diagnosticSettings/storageAccountId",
@@ -393,6 +433,14 @@
                     "Disabled"
                 ],
                 "defaultValue": "AuditIfNotExists"
+            },
+            "retention": {
+                "type": "String",
+                "metadata": {
+                    "displayName": "Retention",
+                    "description": "Specifies the retention of logs and metrics in days"
+                },
+                "defaultValue": "7"
             }
         },
         "policyRule": {
@@ -415,11 +463,11 @@
                                 "allOf": [
                                     {
                                         "field": "Microsoft.Insights/diagnosticSettings/metrics[*].retentionPolicy.days",
-                                        "equals": "7"
+                                        "equals": "[parameters('retention')]"
                                     },
                                     {
                                         "field": "Microsoft.Insights/diagnosticSettings/logs[*].retentionPolicy.days",
-                                        "equals": "7"
+                                        "equals": "[parameters('retention')]"
                                     },
                                     {
                                         "field": "Microsoft.Insights/diagnosticSettings/storageAccountId",
@@ -457,6 +505,14 @@
                     "Disabled"
                 ],
                 "defaultValue": "AuditIfNotExists"
+            },
+            "retention": {
+                "type": "String",
+                "metadata": {
+                    "displayName": "Retention",
+                    "description": "Specifies the retention of logs and metrics in days"
+                },
+                "defaultValue": "7"
             }
         },
         "policyRule": {
@@ -499,11 +555,11 @@
                                 "allOf": [
                                     {
                                         "field": "Microsoft.Insights/diagnosticSettings/metrics[*].retentionPolicy.days",
-                                        "equals": "7"
+                                        "equals": "[parameters('retention')]"
                                     },
                                     {
                                         "field": "Microsoft.Insights/diagnosticSettings/logs[*].retentionPolicy.days",
-                                        "equals": "7"
+                                        "equals": "[parameters('retention')]"
                                     },
                                     {
                                         "field": "Microsoft.Insights/diagnosticSettings/storageAccountId",
@@ -541,6 +597,14 @@
                     "Disabled"
                 ],
                 "defaultValue": "AuditIfNotExists"
+            },
+            "retention": {
+                "type": "String",
+                "metadata": {
+                    "displayName": "Retention",
+                    "description": "Specifies the retention of logs and metrics in days"
+                },
+                "defaultValue": "7"
             }
         },
         "policyRule": {
@@ -607,11 +671,11 @@
                                 "allOf": [
                                     {
                                         "field": "Microsoft.Insights/diagnosticSettings/metrics[*].retentionPolicy.days",
-                                        "equals": "7"
+                                        "equals": "[parameters('retention')]"
                                     },
                                     {
                                         "field": "Microsoft.Insights/diagnosticSettings/logs[*].retentionPolicy.days",
-                                        "equals": "7"
+                                        "equals": "[parameters('retention')]"
                                     },
                                     {
                                         "field": "Microsoft.Insights/diagnosticSettings/storageAccountId",
@@ -649,6 +713,14 @@
                     "Disabled"
                 ],
                 "defaultValue": "AuditIfNotExists"
+            },
+            "retention": {
+                "type": "String",
+                "metadata": {
+                    "displayName": "Retention",
+                    "description": "Specifies the retention of logs and metrics in days"
+                },
+                "defaultValue": "7"
             }
         },
         "policyRule": {
@@ -675,11 +747,11 @@
                                 "allOf": [
                                     {
                                         "field": "Microsoft.Insights/diagnosticSettings/metrics[*].retentionPolicy.days",
-                                        "equals": "7"
+                                        "equals": "[parameters('retention')]"
                                     },
                                     {
                                         "field": "Microsoft.Insights/diagnosticSettings/logs[*].retentionPolicy.days",
-                                        "equals": "7"
+                                        "equals": "[parameters('retention')]"
                                     },
                                     {
                                         "field": "Microsoft.Insights/diagnosticSettings/storageAccountId",
@@ -717,6 +789,14 @@
                     "Disabled"
                 ],
                 "defaultValue": "AuditIfNotExists"
+            },
+            "retention": {
+                "type": "String",
+                "metadata": {
+                    "displayName": "Retention",
+                    "description": "Specifies the retention of logs and metrics in days"
+                },
+                "defaultValue": "7"
             }
         },
         "policyRule": {
@@ -759,11 +839,11 @@
                                 "allOf": [
                                     {
                                         "field": "Microsoft.Insights/diagnosticSettings/metrics[*].retentionPolicy.days",
-                                        "equals": "7"
+                                        "equals": "[parameters('retention')]"
                                     },
                                     {
                                         "field": "Microsoft.Insights/diagnosticSettings/logs[*].retentionPolicy.days",
-                                        "equals": "7"
+                                        "equals": "[parameters('retention')]"
                                     },
                                     {
                                         "field": "Microsoft.Insights/diagnosticSettings/storageAccountId",
@@ -801,6 +881,14 @@
                     "Disabled"
                 ],
                 "defaultValue": "AuditIfNotExists"
+            },
+            "retention": {
+                "type": "String",
+                "metadata": {
+                    "displayName": "Retention",
+                    "description": "Specifies the retention of logs and metrics in days"
+                },
+                "defaultValue": "7"
             }
         },
         "policyRule": {
@@ -855,11 +943,11 @@
                                 "allOf": [
                                     {
                                         "field": "Microsoft.Insights/diagnosticSettings/metrics[*].retentionPolicy.days",
-                                        "equals": "7"
+                                        "equals": "[parameters('retention')]"
                                     },
                                     {
                                         "field": "Microsoft.Insights/diagnosticSettings/logs[*].retentionPolicy.days",
-                                        "equals": "7"
+                                        "equals": "[parameters('retention')]"
                                     },
                                     {
                                         "field": "Microsoft.Insights/diagnosticSettings/storageAccountId",
@@ -965,6 +1053,14 @@
                     "description": "Value of the tag, such as 'production'",
                 },
                 "defaultValue": "PROD"
+            },
+            "workspaceretention": {
+                "type": "String",
+                "metadata": {
+                    "displayName": "Workspace Retention",
+                    "description": "Specifies the retention of log analytics workspace in days"
+                },
+                "defaultValue": "365"
             }
         },
         "policyRule": {
@@ -989,7 +1085,7 @@
                         "allOf": [
                             {
                                 "field": "Microsoft.OperationalInsights/workspaces/retentionInDays",
-                                "equals": "365"
+                                "equals": "[parameters('workspaceretention')]"
                             }
                         ]
                     }

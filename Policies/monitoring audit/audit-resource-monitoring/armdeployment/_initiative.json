@@ -28,6 +28,22 @@
                     "description": "Value of the tag, such as 'production'"                   
                 },
                 "defaultValue": "PROD"
+            },
+            "retention": {
+                "type": "string",
+                "metadata": {
+                    "displayName": "Retention",
+                    "description": "Specifies the retention of logs and metrics in days"
+                },
+                "defaultValue": "7"
+            },
+            "workspaceretention":{
+                "type": "string",
+                "metadata":{
+                    "displayName": "Workspace Retention",
+                    "description": "Specifies the retention of log analytics workspace in days"
+                },
+                "defaultvalue": "365"
             }
         },
         "policyDefinitions": [
@@ -37,6 +53,9 @@
                 "parameters": {
                     "effect": {
                         "value": "[parameters('effect')]"
+                    },
+                    "retention": {
+                        "value": "[parameters('retention')]"
                     }
                 }
             },
@@ -46,6 +65,9 @@
                 "parameters": {
                     "effect": {
                         "value": "[parameters('effect')]"
+                    },
+                    "retention": {
+                        "value": "[parameters('retention')]"
                     }
                 }
             },
@@ -55,6 +77,9 @@
                 "parameters": {
                     "effect": {
                         "value": "[parameters('effect')]"
+                    },
+                    "retention": {
+                        "value": "[parameters('retention')]"
                     }
                 }
             },
@@ -64,6 +89,9 @@
                 "parameters": {
                     "effect": {
                         "value": "[parameters('effect')]"
+                    },
+                    "retention": {
+                        "value": "[parameters('retention')]"
                     }
                 }
             },
@@ -73,6 +101,9 @@
                 "parameters": {
                     "effect": {
                         "value": "[parameters('effect')]"
+                    },
+                    "retention": {
+                        "value": "[parameters('retention')]"
                     }
                 }
             },
@@ -82,15 +113,9 @@
                 "parameters": {
                     "effect": {
                         "value": "[parameters('effect')]"
-                    }
-                }
-            },
-            {
-                "policyDefinitionId": "/subscriptions/abe2f1ed-4e2a-44bc-9bd5-13a1ce863b4d/providers/Microsoft.Authorization/policyDefinitions/log-analytics-retention-audit",
-                "policyDefinitionReferenceId": "Log_Analytics_Resource_Diag",
-                "parameters": {
-                    "effect": {
-                        "value": "[parameters('effect')]"
+                    },
+                    "retention": {
+                        "value": "[parameters('retention')]"
                     }
                 }
             },
@@ -100,6 +125,9 @@
                 "parameters": {
                     "effect": {
                         "value": "[parameters('effect')]"
+                    },
+                    "retention": {
+                        "value": "[parameters('retention')]"
                     }
                 }
             },
@@ -109,6 +137,9 @@
                 "parameters": {
                     "effect": {
                         "value": "[parameters('effect')]"
+                    },
+                    "retention": {
+                        "value": "[parameters('retention')]"
                     }
                 }
             },
@@ -118,6 +149,9 @@
                 "parameters": {
                     "effect": {
                         "value": "[parameters('effect')]"
+                    },
+                    "retention": {
+                        "value": "[parameters('retention')]"
                     }
                 }
             },
@@ -127,6 +161,9 @@
                 "parameters": {
                     "effect": {
                         "value": "[parameters('effect')]"
+                    },
+                    "retention": {
+                        "value": "[parameters('retention')]"
                     }
                 }
             },
@@ -136,6 +173,9 @@
                 "parameters": {
                     "effect": {
                         "value": "[parameters('effect')]"
+                    },
+                    "retention": {
+                        "value": "[parameters('retention')]"
                     }
                 }
             },
@@ -151,6 +191,9 @@
                     },
                     "tagValue": {
                         "value": "[parameters('tagValue')]"
+                    },
+                    "workspaceretention": {
+                        "value": "[parameters('workspaceretention')]"
                     }
                 }
             },

@@ -11,6 +11,12 @@
         },
         "tagValue": {
             "value": "PROD"
+        },
+        "retention": {
+            "value": "7"
+        },
+        "workspaceretention":{
+            "value": "365"
         }
     }
 }
