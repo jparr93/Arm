@@ -13,7 +13,7 @@
         }
     },
     "variables": {
-        "linkedtemplateuri": "https://raw.githubusercontent.com/jparr93/Arm/master/Landing%20Zone/linked/"
+        "linkedtemplateuri": "https://raw.githubusercontent.com/jparr93/Arm/master/Landing%20Zone/Linked/"
     },
     "resources": [
         {
