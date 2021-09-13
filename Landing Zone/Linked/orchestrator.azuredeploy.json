@@ -79,7 +79,7 @@
                                     "contentVersion": "1.0.0.0"
                                 },
                                 "parameters": {
-                                    "networks": {
+                                    "firewall": {
                                         "value": "[parameters('FirewallParameters').firewall]"
                                     }
                                 }
@@ -116,8 +116,11 @@
                                     "contentVersion": "1.0.0.0"
                                 },
                                 "parameters": {
-                                    "networks": {
+                                    "gateway": {
                                         "value": "[parameters('VirtualNetworkGatewayParameters').gateway]"
+                                    },
+                                    "networks": {
+                                        "value": "[parameters('VirtualNetworkParameters').networks]"
                                     }
                                 }
                             }
