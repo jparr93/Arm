@@ -1,0 +1,70 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+   "parameters": {                      
+        "VirtualNetworkGatewayParameters": {
+            "type": "object"
+        },
+          "VirtualNetworkParameters": {
+            "type": "object"
+        },
+        "FirewallParameters": {
+            "type": "object"
+        }
+    },
+    "variables": {
+        "publicIpAddressResourceId": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('FirewallParameters').fwpipname)]",
+        "firewallName": "[parameters('FirewallParameters').name]",
+        "networkRuleCollections" : "[parameters('FirewallParameters').networkRuleCollection]",
+        "applicationRuleCollections" : "[parameters('FirewallParameters').applicationRuleCollections]",
+        "natRuleCollections" : "[parameters('FirewallParameters').natRuleCollections]"
+    },
+    "resources": [
+        {
+            "type": "Microsoft.Network/publicIPAddresses",
+            "apiVersion": "2020-04-01",
+            "name": "[parameters('FirewallParameters').fwpipname]",
+            "location": "[resourceGroup().location]",
+            "sku": {
+                "name": "Standard"
+            },
+            "properties": {
+                "publicIPAddressVersion": "IPv4",
+                "publicIPAllocationMethod": "Static",
+                "idleTimeoutInMinutes": 4,
+                "ipTags": []
+            }
+        },
+        {
+        "type": "Microsoft.Network/azureFirewalls",
+        "apiVersion": "2020-05-01",
+        "name": "[variables('firewallName')]",
+        "location": "[resourceGroup().location]",
+        "properties": {
+            "sku": "[parameters('FirewallParameters').sku]",
+            "threatIntelMode": "[parameters('FirewallParameters').threatIntelMode]",               
+            "ipConfigurations": [
+                {
+                    "name": "IPconfig",
+                    "properties": {
+                        "privateIPAddress": "10.0.1.10",
+                        "publicIPAddress": {
+                            "id": "[variables('publicIpAddressResourceId')]"
+                        },
+                        "subnet": {
+                            "id": "/subscriptions/3fcee2cc-1758-46d1-b7b7-d9d3f031c9b1/resourceGroups/lz-rg/providers/Microsoft.Network/virtualNetworks/lz-vnet/subnets/AzureFirewallSubnet"
+                        }
+                    }
+                }
+            ],
+            "networkRuleCollections": "[variables('networkRuleCollections')]",
+            "applicationRuleCollections": "[variables('applicationRuleCollections')]",
+            "natRuleCollections": "[variables('natRuleCollections')]"
+        },
+        "dependsOn": [            	
+            "[variables('publicIpAddressResourceId')]"                
+        ]
+    }
+
+    ]
+}
