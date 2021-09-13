@@ -1,0 +1,87 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "VirtualNetworkParameters": {
+            "value": {
+                "networks": [
+                    {
+                        "name": "lz-vnet",
+                        "tags": {
+                            "Environment": "DEV",
+                            "Application": "LZ"
+                        },
+                        "properties": {
+                            "addressSpace": {
+                                "addressPrefixes": [
+                                    "10.0.0.0/16"
+                                ]
+                            },
+                            "enableDdosProtection": false,
+                            "enableVmProtection": false
+                        },
+                        "subnets": [
+                            {
+                                "name": "AzureFirewallSubnet",
+                                "properties": {
+                                    "addressPrefix": "10.0.1.0/24"
+                                }
+                            },
+                            {
+                                "name": "GatewaySubnet",
+                                "properties": {
+                                    "addressPrefix": "10.0.2.0/24"
+                                }
+                            },
+                            {
+                                "name": "RogueSubnet",
+                                "properties": {
+                                    "addressPrefix": "10.0.3.0/24"
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        "FirewallParameters": {
+            "value": {
+                "firewall": [
+                    {
+                        "name": "lz-fw",
+                        "sku": {
+                            "name": "AZFW_VNet",
+                            "tier": "Standard"
+                        },
+                        "threatIntelMode": "Alert",
+                        "tags": {
+                            "Environment": "DEV",
+                            "Application": "LZ"
+                        },
+                        "fwpipname": "lz-fw-pip",
+                        "natRuleCollections": [],
+                        "networkRuleCollection": [],
+                        "applicationRuleCollections": []
+                    }
+                ]
+            }
+        },
+        "VirtualNetworkGatewayParameters": {
+            "value": {
+                "gateway": [
+                    {
+                        "properties": {
+                            "gatewayType": "VPN",
+                            "vpnType": "RouteBased",
+                            "sku": {
+                                "name": "VpnGw1AZ",
+                                "tier": "VpnGw1AZ"
+                            },
+                            "vpnGatewayGeneration": "Generation1"
+                        }
+                    }
+                ]
+            }
+        }
+    }
+}

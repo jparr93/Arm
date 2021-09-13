@@ -1,0 +1,52 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "networks": {
+            "type": "array"
+        }
+    },
+    "variables": {
+        "name": "[parameters('networks').name]",
+        "resourceId": "[resourceId('Microsoft.Network/virtualNetworks', variables('name'))]",
+        "addressSpace": "[parameters('networks').properties.addressSpace]",
+        "subnets": "[parameters('networks').subnets]"
+    },
+    "resources": [
+        {
+            "comments": "** VIRTUAL NETWORK **",
+            "type": "Microsoft.Network/virtualNetworks",
+            "apiVersion": "2019-11-01",
+            "name": "[variables('name')]",
+            "location": "[resourceGroup().location]",
+            "properties": {
+                "addressSpace": "[variables('addressSpace')]",
+                "enableDdosProtection": "[parameters('networks').properties.enableDdosProtection]",
+                "enableVmProtection": "[parameters('networks').properties.enableVmProtection]",
+                "copy": [
+                    {
+                        "name": "subnets",
+                        "count": "[length(variables('subnets'))]",
+                        "input": {
+                            "name": "[variables('subnets')[copyIndex('subnets')].name]",
+                            "properties": {
+                                "addressPrefix": "[variables('subnets')[copyIndex('subnets')].properties.addressPrefix]",
+                                "privateEndpointNetworkPolicies": "Disabled"
+                            }
+                        }
+                    }
+                ]
+            }
+        }
+    ],
+    "outputs": {
+        "virtualNetworkName": {
+            "type": "string",
+            "value": "[variables('name')]"
+        },
+        "virtualNetworkResourceId": {
+            "type": "string",
+            "value": "[variables('resourceId')]"
+        }
+    }
+}
