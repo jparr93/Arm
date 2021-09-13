@@ -38,7 +38,7 @@
                             "properties": {
                                 "mode": "Incremental",
                                 "templateLink": {
-                                    "uri": "[concat (variables('linkedtemplateuri'), 'networks.azuredeploy.json')]",
+                                    "uri": "[concat (variables('linkedtemplateuri'), 'networking.azuredeploy.json')]",
                                     "contentVersion": "1.0.0.0"
                                 },
                                 "parameters": {
