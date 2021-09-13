@@ -2,28 +2,22 @@
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
    "parameters": {                      
-        "VirtualNetworkGatewayParameters": {
-            "type": "object"
-        },
-          "VirtualNetworkParameters": {
-            "type": "object"
-        },
-        "FirewallParameters": {
+        "firewall": {
             "type": "object"
         }
-    },
+   },
     "variables": {
-        "publicIpAddressResourceId": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('FirewallParameters').fwpipname)]",
-        "firewallName": "[parameters('FirewallParameters').name]",
-        "networkRuleCollections" : "[parameters('FirewallParameters').networkRuleCollection]",
-        "applicationRuleCollections" : "[parameters('FirewallParameters').applicationRuleCollections]",
-        "natRuleCollections" : "[parameters('FirewallParameters').natRuleCollections]"
+        "publicIpAddressResourceId": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('firewall').fwpipname)]",
+        "firewallName": "[parameters('firewall').name]",
+        "networkRuleCollections" : "[parameters('firewall').networkRuleCollection]",
+        "applicationRuleCollections" : "[parameters('firewall').applicationRuleCollections]",
+        "natRuleCollections" : "[parameters('firewall').natRuleCollections]"
     },
     "resources": [
         {
             "type": "Microsoft.Network/publicIPAddresses",
             "apiVersion": "2020-04-01",
-            "name": "[parameters('FirewallParameters').fwpipname]",
+            "name": "[parameters('firewall').fwpipname]",
             "location": "[resourceGroup().location]",
             "sku": {
                 "name": "Standard"
@@ -41,8 +35,8 @@
         "name": "[variables('firewallName')]",
         "location": "[resourceGroup().location]",
         "properties": {
-            "sku": "[parameters('FirewallParameters').sku]",
-            "threatIntelMode": "[parameters('FirewallParameters').threatIntelMode]",               
+            "sku": "[parameters('firewall').sku]",
+            "threatIntelMode": "[parameters('firewall').threatIntelMode]",               
             "ipConfigurations": [
                 {
                     "name": "IPconfig",
