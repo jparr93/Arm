@@ -17,7 +17,7 @@
             "comments": "** VIRTUAL NETWORK **",
             "type": "Microsoft.Network/virtualNetworks",
             "apiVersion": "2019-11-01",
-            "name": "[variables('name')]",
+            "name": "[parameters('networks').name]",
             "location": "[resourceGroup().location]",
             "properties": {
                 "addressSpace": "[variables('addressSpace')]",
