@@ -46,7 +46,7 @@
         },
         "FirewallParameters": {
             "value": {
-                "firewall": [
+                "firewall": 
                     {
                         "name": "lz-fw",
                         "sku": {
@@ -63,12 +63,12 @@
                         "networkRuleCollection": [],
                         "applicationRuleCollections": []
                     }
-                ]
+                
             }
         },
         "VirtualNetworkGatewayParameters": {
             "value": {
-                "gateway": [
+                "gateway": 
                     {
                         "properties": {
                             "gatewayType": "VPN",
@@ -80,7 +80,7 @@
                             "vpnGatewayGeneration": "Generation1"
                         }
                     }
-                ]
+                
             }
         }
     }
