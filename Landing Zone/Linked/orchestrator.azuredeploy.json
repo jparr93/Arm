@@ -21,111 +21,56 @@
             "type": "Microsoft.Resources/deployments",
             "apiVersion": "2020-10-01",
             "properties": {
-                "expressionEvaluationOptions": {
-                    "scope": "outer"
-                },
                 "mode": "Incremental",
-                "template": {
-                    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
-                    "contentVersion": "1.0.0.0",
-                    "parameters": {
-                    },
-                    "resources": [
-                        {
-                            "name": "nworks-deploy",
-                            "type": "Microsoft.Resources/deployments",
-                            "apiVersion": "2020-10-01",
-                            "properties": {
-                                "mode": "Incremental",
-                                "templateLink": {
-                                    "uri": "[concat (variables('linkedtemplateuri'), 'networking.azuredeploy.json')]",
-                                    "contentVersion": "1.0.0.0"
-                                },
-                                "parameters": {
-                                    "networks": {
-                                        "value": "[parameters('VirtualNetworkParameters').networks]"
-                                    }
-                                }
-                            }
-                        }
-                    ]
+                "templateLink": {
+                    "uri": "[concat (variables('linkedtemplateuri'), 'networking.azuredeploy.json')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "networks": {
+                        "value": "[parameters('VirtualNetworkParameters').networks]"
+                    }
                 }
             }
         },
+
         {
             "name": "fw-deploy",
             "type": "Microsoft.Resources/deployments",
             "apiVersion": "2020-10-01",
-            "dependson": [ "[resourceId('Microsoft.Resources/deployments', 'nworks-deploy')]" ],
+            "dependsOn": [ "[resourceId('Microsoft.Resources/deployments', 'nworks-deploy')]" ],
             "properties": {
-                "expressionEvaluationOptions": {
-                    "scope": "outer"
-                },
                 "mode": "Incremental",
-                "template": {
-                    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
-                    "contentVersion": "1.0.0.0",
-                    "parameters": {
-                    },
-                    "resources": [
-                        {
-                            "name": "fw-deploy",
-                            "type": "Microsoft.Resources/deployments",
-                            "apiVersion": "2020-10-01",
-                            "properties": {
-                                "mode": "Incremental",
-                                "templateLink": {
-                                    "uri": "[concat (variables('linkedtemplateuri'), 'firewall.azuredeploy.json')]",
-                                    "contentVersion": "1.0.0.0"
-                                },
-                                "parameters": {
-                                    "firewall": {
-                                        "value": "[parameters('FirewallParameters').firewall]"
-                                    }
-                                }
-                            }
-                        }
-                    ]
+                "templateLink": {
+                    "uri": "[concat (variables('linkedtemplateuri'), 'firewall.azuredeploy.json')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "firewall": {
+                        "value": "[parameters('FirewallParameters').firewall]"
+                    }
                 }
             }
         },
         {
+
             "name": "gw-deploy",
             "type": "Microsoft.Resources/deployments",
             "apiVersion": "2020-10-01",
-            "dependson": [ "[resourceId('Microsoft.Resources/deployments', 'fw-deploy')]" ],
+            "dependsOn": [ "[resourceId('Microsoft.Resources/deployments', 'fw-deploy')]" ],
             "properties": {
-                "expressionEvaluationOptions": {
-                    "scope": "outer"
-                },
                 "mode": "Incremental",
-                "template": {
-                    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
-                    "contentVersion": "1.0.0.0",
-                    "parameters": {
+                "templateLink": {
+                    "uri": "[concat (variables('linkedtemplateuri'), 'gateway.azuredeploy.json')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "gateway": {
+                        "value": "[parameters('VirtualNetworkGatewayParameters').gateway]"
                     },
-                    "resources": [
-                        {
-                            "name": "gw-deploy",
-                            "type": "Microsoft.Resources/deployments",
-                            "apiVersion": "2020-10-01",
-                            "properties": {
-                                "mode": "Incremental",
-                                "templateLink": {
-                                    "uri": "[concat (variables('linkedtemplateuri'), 'gateway.azuredeploy.json')]",
-                                    "contentVersion": "1.0.0.0"
-                                },
-                                "parameters": {
-                                    "gateway": {
-                                        "value": "[parameters('VirtualNetworkGatewayParameters').gateway]"
-                                    },
-                                    "networks": {
-                                        "value": "[parameters('VirtualNetworkParameters').networks]"
-                                    }
-                                }
-                            }
-                        }
-                    ]
+                    "networks": {
+                        "value": "[parameters('VirtualNetworkParameters').networks]"
+                    }
                 }
             }
         }
