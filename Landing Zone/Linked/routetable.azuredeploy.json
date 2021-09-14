@@ -19,17 +19,7 @@
             "properties": {
                 "disableBgpRoutePropagation": "true",
                 "routes": [
-                    {
-                        "id": "/subscriptions/3fcee2cc-1758-46d1-b7b7-d9d3f031c9b1/resourceGroups/lz-rg/providers/Microsoft.Network/virtualNetworks/lz-vnet",
-                        "name": "internet",
-                        "properties": {
-                            "addressPrefix": "192.168.10.0/24",
-                            "hasBgpOverride": "false",
-                            "nextHopIpAddress": "192.168.11.1",
-                            "nextHopType": "VirtualAppliance"
-                        },
-                        "type": "VirtualAppliance"
-                    }
+            
                 ]
             }
         }
