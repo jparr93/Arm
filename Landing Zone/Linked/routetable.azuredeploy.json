@@ -23,9 +23,9 @@
                         "id": "/subscriptions/3fcee2cc-1758-46d1-b7b7-d9d3f031c9b1/resourceGroups/lz-rg/providers/Microsoft.Network/virtualNetworks/lz-vnet",
                         "name": "internet",
                         "properties": {
-                            "addressPrefix": "0.0.0.0/0",
+                            "addressPrefix": "1.2.3.4/24",
                             "hasBgpOverride": "false",
-                            "nextHopIpAddress": "0.0.0.0/0",
+                            "nextHopIpAddress": "1.2.3.4/24",
                             "nextHopType": "VirtualAppliance"
                         },
                         "type": "VirtualAppliance"
