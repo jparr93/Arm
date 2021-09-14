@@ -13,6 +13,9 @@
         },
         "MonitoringParameters": {
             "type": "object"
+        },
+        "DiagnosticStorageParameters":{
+            "type": "object"
         }
     },
     "variables": {
@@ -111,6 +114,50 @@
                 "parameters": {
                     "loganalytics": {
                         "value": "[parameters('MonitoringParameters').loganalytics]"
+                    }
+                }
+            }
+        },
+         {
+
+            "name": "sadiag-deploy",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2020-10-01",
+            "dependsOn": [ "[resourceId('Microsoft.Resources/deployments', 'law-deploy')]" ],
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[concat (variables('linkedtemplateuri'), 'diagnosticstorage.azuredeploy.json')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "storageaccount": {
+                        "value": "[parameters('DiagnosticStorageParameters').storageaccount]"
+                    }
+                }
+            }
+        },
+        {
+
+            "name": "fwdiag-deploy",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2020-10-01",
+            "dependsOn": [ "[resourceId('Microsoft.Resources/deployments', 'sadiag-deploy')]" ],
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[concat (variables('linkedtemplateuri'), 'firewalldiag.azuredeploy.json')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "firewalldiagnostics": {
+                        "value": "[parameters('FirewallParameters').diagnostics]"
+                    },
+                    "firewall": {
+                        "value": "[parameters('FirewallParameters').firewall]"
+                    },
+                    "storageaccount": {
+                        "value": "[parameters('DiagnosticStorageParameters').storageaccount]"
                     }
                 }
             }

@@ -1,0 +1,55 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "firewalldiagnostics": {
+            "type": "object"
+        },
+        "firewall": {
+            "type": "object"
+        },
+        "storageaccount": {
+            "type": "object"
+        }
+    
+},
+"variables": {
+            "retentionpolicy": "[parameters('firewalldiagnostics').retentionpolicy]",
+            "Storageaccountname":  "[parameters('storageaccount').name]",
+            "storageaccountresourceid": "[concat('Microsoft.Storage/storageAccounts/',variables('Storageaccountname'), uniqueString(resourceGroup().id))]"
+}, 
+"resources": [
+    {
+        "type": "Microsoft.Network/azureFirewalls/providers/diagnosticSettings",
+        "apiVersion": "2017-05-01-preview",
+        "name": "[concat(parameters('firewall').name, '/Microsoft.Insights/FW-SA-Setting')]",
+        "dependsOn": [],
+        "properties": {
+            "storageAccountId": "[variables('storageAccountResourceId')]",
+            "logs": [
+                {
+                    "category": "AzureFirewallApplicationRule",
+                    "enabled": true,
+                    "retentionPolicy": "[variables('retentionpolicy')]"
+                },
+                {
+                    "category": "AzureFirewallNetworkRule",
+                    "enabled": true,
+                    "retentionPolicy": "[variables('retentionpolicy')]"
+                },
+                {
+                    "category": "AzureFirewallDnsProxy",
+                    "enabled": true,
+                    "retentionPolicy": "[variables('retentionpolicy')]"
+                }
+            ],
+            "metrics": [
+                {
+                    "category": "AllMetrics",
+                    "enabled": true,
+                    "retentionPolicy": "[parameters('retentionPolicy')]"
+                }
+            ]
+        }
+    }
+] }

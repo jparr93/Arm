@@ -59,6 +59,9 @@
                     "natRuleCollections": [],
                     "networkRuleCollection": [],
                     "applicationRuleCollections": []
+                },
+                "diagnostics": {
+                    "retentionpolicy": "7"
                 }
             }
         },
@@ -105,10 +108,17 @@
                             "tier": "pergb2018"
                         },
                         "retentionindays": "120",
-                        "resourcepermissions": "yes"
+                        "resourcepermissions": "true"
 
                 }
             }
+        },
+        "DiagnosticStorageParameters":{
+         "value": {
+             "storageaccount": {
+                 "name":"lzsadiag"
+             }
+         }   
         }
     }
 }
