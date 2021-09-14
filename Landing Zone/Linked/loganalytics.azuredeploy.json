@@ -18,7 +18,7 @@
       "tags": "[parameters('loganalytics').tags]",
       "properties": {
         "sku": {
-          "name": "[parameters('loganalytics').sku]"
+          "name": "[parameters('loganalytics').sku.name]"
         },
         "retentionInDays": "[parameters('loganalytics').retentionindays]",
         "features": {
