@@ -1,0 +1,37 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "routetable": {
+            "type": "object"
+        }
+    },
+    "variables": {
+        "name": "[parameters('routetable').name]"
+    },
+    "resources": [
+        {
+            "type": "Microsoft.Network/routeTables",
+            "apiVersion": "2021-02-01",
+            "name": "[variables('name')]",
+            "location": "[resourceGroup().location]",
+            "tags": "[parameters('routetable').tags]",
+            "properties": {
+                "disableBgpRoutePropagation": "true",
+                "routes": [
+                    {
+                        "id": "/subscriptions/3fcee2cc-1758-46d1-b7b7-d9d3f031c9b1/resourceGroups/lz-rg/providers/Microsoft.Network/virtualNetworks/lz-vnet",
+                        "name": "internet",
+                        "properties": {
+                            "addressPrefix": "0.0.0.0/0",
+                            "hasBgpOverride": "false",
+                            "nextHopIpAddress": "0.0.0.0/0",
+                            "nextHopType": "internet"
+                        },
+                        "type": "vnet"
+                    }
+                ]
+            }
+        }
+    ]
+}

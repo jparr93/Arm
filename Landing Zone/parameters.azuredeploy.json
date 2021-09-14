@@ -245,6 +245,9 @@
                         },
                         "gatewayIpAddress": "109.232.61.236"
                     }
+                },
+                "routetable": {
+                  "name": "lz-rt"
                 }
             }
         },
