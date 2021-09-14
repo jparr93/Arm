@@ -1,0 +1,32 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-08-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "localgateway": {
+      "type": "object"
+    }
+  },
+  "variables": {
+        "localNetworkGatewayName": "[parameters('localgateway').name]"
+  },
+  "resources": [
+    {
+      "type": "Microsoft.OperationalInsights/workspaces",
+      "name": "[variables('localNetworkGatewayName')]",
+      "apiVersion": "2020-08-01",
+      "location": "[resourceGroup().location]",
+      "tags": "[parameters('localgateway').tags]",
+      "properties": {
+        "sku": {
+          "name": "[parameters('localgateway').sku]"
+        },
+        "retentionInDays": "[parameters('localgateway').retentionindays]",
+        "features": {
+          "searchVersion": 1,
+          "legacy": 0,
+          "enableLogAccessUsingOnlyResourcePermissions": "[parameters('localgateway').resourcepermissions]"
+        }
+      }
+    }
+  ]
+}

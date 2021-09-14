@@ -4,83 +4,110 @@
     "parameters": {
         "VirtualNetworkParameters": {
             "value": {
-                "networks": 
-                    {
-                        "name": "lz-vnet",
-                        "tags": {
-                            "Environment": "DEV",
-                            "Application": "LZ"
+                "networks": {
+                    "name": "lz-vnet",
+                    "tags": {
+                        "Environment": "DEV",
+                        "Application": "LZ"
+                    },
+                    "properties": {
+                        "addressSpace": {
+                            "addressPrefixes": [
+                                "10.0.0.0/16"
+                            ]
                         },
-                        "properties": {
-                            "addressSpace": {
-                                "addressPrefixes": [
-                                    "10.0.0.0/16"
-                                ]
-                            },
-                            "enableDdosProtection": false,
-                            "enableVmProtection": false
-                        },
-                        "subnets": [
-                            {
-                                "name": "AzureFirewallSubnet",
-                                "properties": {
-                                    "addressPrefix": "10.0.1.0/24"
-                                }
-                            },
-                            {
-                                "name": "GatewaySubnet",
-                                "properties": {
-                                    "addressPrefix": "10.0.2.0/24"
-                                }
-                            },
-                            {
-                                "name": "RogueSubnet",
-                                "properties": {
-                                    "addressPrefix": "10.0.3.0/24"
-                                }
+                        "enableDdosProtection": false,
+                        "enableVmProtection": false
+                    },
+                    "subnets": [
+                        {
+                            "name": "AzureFirewallSubnet",
+                            "properties": {
+                                "addressPrefix": "10.0.1.0/24"
                             }
-                        ]
-                    }
-                
+                        },
+                        {
+                            "name": "GatewaySubnet",
+                            "properties": {
+                                "addressPrefix": "10.0.2.0/24"
+                            }
+                        },
+                        {
+                            "name": "RogueSubnet",
+                            "properties": {
+                                "addressPrefix": "10.0.3.0/24"
+                            }
+                        }
+                    ]
+                }
             }
         },
         "FirewallParameters": {
             "value": {
-                "firewall": 
-                    {
-                        "name": "lz-fw",
-                        "sku": {
-                            "name": "AZFW_VNet",
-                            "tier": "Standard"
-                        },
-                        "threatIntelMode": "Alert",
-                        "tags": {
-                            "Environment": "DEV",
-                            "Application": "LZ"
-                        },
-                        "fwpipname": "lz-fw-pip",
-                        "natRuleCollections": [],
-                        "networkRuleCollection": [],
-                        "applicationRuleCollections": []
-                    }
-                
+                "firewall": {
+                    "name": "lz-fw",
+                    "sku": {
+                        "name": "AZFW_VNet",
+                        "tier": "Standard"
+                    },
+                    "threatIntelMode": "Alert",
+                    "tags": {
+                        "Environment": "DEV",
+                        "Application": "LZ"
+                    },
+                    "fwpipname": "lz-fw-pip",
+                    "natRuleCollections": [],
+                    "networkRuleCollection": [],
+                    "applicationRuleCollections": []
+                }
             }
         },
         "VirtualNetworkGatewayParameters": {
             "value": {
-                "gateway": 
-                    {
-                        "properties": {
-                            "gatewayType": "VPN",
-                            "vpnType": "RouteBased",
-                            "sku": {
-                                "name": "VpnGw1AZ",
-                                "tier": "VpnGw1AZ"
-                            },
-                            "vpnGatewayGeneration": "Generation1"
-                        }
+                "gateway": {
+                    "properties": {
+                        "gatewayType": "VPN",
+                        "vpnType": "RouteBased",
+                        "sku": {
+                            "name": "VpnGw1AZ",
+                            "tier": "VpnGw1AZ"
+                        },
+                        "vpnGatewayGeneration": "Generation1"
                     }
-                
+                },
+                "localgateway": {
+                    "name": "lz-lng",
+                    "tags": {
+                        "Environment": "DEV",
+                        "Application": "Monitoring"
+                    },
+                    "properties": {
+                        "localNetworkAddressSpace": {
+                            "addressPrefixes": [
+                                "10.156.64.0/19"
+                            ]
+                        },
+                        "gatewayIpAddress": "109.232.61.236"
+                    }
+                }
+            }
+        },
+        "MonitoringParameters": {
+            "value": {
+                "loganalytics": {
+                        "name": "lz-law",
+                        "tags": {
+                            "Environment": "JP",
+                            "Application": "Monitoring"
+                        },
+                        "sku" : {
+                            "name": "pergb2018",
+                            "tier": "pergb2018"
+                        },
+                        "retentionindays": "120",
+                        "resourcepermissions": "yes"
+
+                }
             }
         }
     }

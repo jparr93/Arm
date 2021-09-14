@@ -1,0 +1,33 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {       
+        "localgateway": {
+            "type": "object"
+        }
+    },
+    "variables": {
+        "localNetworkGatewayName": "[parameters('localgateway').name]",
+        "localNetworkGatewayResourceId": "[resourceId('Microsoft.Network/localNetworkGateways', variables('localNetworkGatewayName'))]"       
+    },
+    "resources": [
+        {
+            "type": "Microsoft.Network/localNetworkGateways",
+            "apiVersion": "2020-05-01",
+            "name": "[variables('localNetworkGatewayName')]",
+            "location": "[resourceGroup().location]",
+            "tags": "[parameters('localgateway').tags]",
+            "properties": "[parameters('localgateway').properties]"
+        }          
+    ],
+    "outputs": {
+        "localNetworkGatewayName": {
+            "type": "string",
+            "value": "[variables('localNetworkGatewayName')]"
+        },
+        "localNetworkGatewayResourceId": {
+            "type": "string",
+            "value": "[variables('localNetworkGatewayResourceId')]"
+        }
+    }
+}
