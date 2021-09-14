@@ -57,12 +57,164 @@
                     },
                     "fwpipname": "lz-fw-pip",
                     "natRuleCollections": [],
-                    "networkRuleCollection": [],
-                    "applicationRuleCollections": []
+                    "networkRuleCollection": [
+                        {
+                            "name": "Net-Kerberos-Inbound",
+                            "properties": {
+                              "priority": "180",
+                              "action": {
+                                "type": "Allow"
+                              },
+                              "rules": [
+                                {
+                                  "name": "Kerberos-Clients-to-KDC",
+                                  "protocols": [
+                                    "TCP",
+                                    "UDP"
+                                  ],
+                                  "sourceAddresses": [
+                                    "10.1.9.0/24",
+                                    "10.1.11.0/24",
+                                    "10.1.12.0/24"
+                                  ],
+                                  "destinationAddresses": [
+                                    "10.1.1.0/24"
+                                  ],
+                                  "destinationPorts": [
+                                    "88"
+                                  ]
+                                },
+                                {
+                                  "name": "Kerberos-Clients-to-KDC-Password-Change",
+                                  "protocols": [
+                                    "TCP",
+                                    "UDP"
+                                  ],
+                                  "sourceAddresses": [
+                                    "10.1.9.0/24",
+                                    "10.1.11.0/24",
+                                    "10.1.12.0/24"
+                                  ],
+                                  "destinationAddresses": [
+                                    "10.1.1.0/24"
+                                  ],
+                                  "destinationPorts": [
+                                    "464"
+                                  ]
+                                },
+                                {
+                                  "name": "KDC-to-Kerberos-Clients",
+                                  "protocols": [
+                                    "UDP"
+                                  ],
+                                  "sourceAddresses": [
+                                    "10.1.1.0/24"
+                                  ],
+                                  "destinationAddresses": [
+                                    "10.1.9.0/24",
+                                    "10.1.11.0/24",
+                                    "10.1.12.0/24"
+                                  ],
+                                  "destinationPorts": [
+                                    "88"
+                                  ]
+                                }
+                              ]
+                            }
+                          }
+                    ],
+                    "applicationRuleCollections": [
+                        {
+                            "name": "App-Log-Analytics-Outbound",
+                            "properties": {
+                              "priority": "120",
+                              "action": {
+                                "type": "Allow"
+                              },
+                              "rules": [
+                                {
+                                  "name": "VMs-to-Log-Analytics-Advisor",
+                                  "protocols": [
+                                    {
+                                      "port": "443",
+                                      "protocolType": "Https"
+                                    }
+                                  ],
+                                  "sourceAddresses": [
+                                    "10.1.9.0/24",
+                                    "10.1.1.0/24",
+                                    "10.1.11.0/24",
+                                    "10.1.12.0/24"
+                                  ],
+                                  "fqdnTags": [],
+                                  "targetFqdns": [
+                                    "46346666771915772advisor.blob.core.windows.net"
+                                  ]
+                                },
+                                {
+                                  "name": "VMs-to-Log-Analytics-SC-Advisor-Content",
+                                  "protocols": [
+                                    {
+                                      "port": "443",
+                                      "protocolType": "Https"
+                                    }
+                                  ],
+                                  "sourceAddresses": [
+                                    "10.1.9.0/24",
+                                    "10.1.1.0/24",
+                                    "10.1.11.0/24",
+                                    "10.1.12.0/24"
+                                  ],
+                                  "fqdnTags": [],
+                                  "targetFqdns": [
+                                    "scadvisorcontent.blob.core.windows.net"
+                                  ]
+                                },
+                                {
+                                  "name": "VMs-to-Log-Analytics-SC-Advisor-Content-Pl",
+                                  "protocols": [
+                                    {
+                                      "port": "443",
+                                      "protocolType": "Https"
+                                    }
+                                  ],
+                                  "sourceAddresses": [
+                                    "10.1.9.0/24",
+                                    "10.1.1.0/24",
+                                    "10.1.11.0/24",
+                                    "10.1.12.0/24"
+                                  ],
+                                  "fqdnTags": [],
+                                  "targetFqdns": [
+                                    "scadvisorcontentpl.blob.core.windows.net"
+                                  ]
+                                },
+                                {
+                                  "name": "VMs-to-Log-Analytics-S-UK-OI-Oms",
+                                  "protocols": [
+                                    {
+                                      "port": "443",
+                                      "protocolType": "Https"
+                                    }
+                                  ],
+                                  "sourceAddresses": [
+                                    "10.1.9.0/24",
+                                    "10.1.1.0/24",
+                                    "10.1.11.0/24",
+                                    "10.1.12.0/24"
+                                  ],
+                                  "fqdnTags": [],
+                                  "targetFqdns": [
+                                    "sukoioms.blob.core.windows.net"
+                                  ]
+                                }
+                              ]
+                            }
+                          }
+                    ]
                 },
                 "diagnostics": {
-                    "retentionpolicy": "7",
-                    "said": "/subscriptions/3fcee2cc-1758-46d1-b7b7-d9d3f031c9b1/resourcegroups/lz-rg-diag/providers/Microsoft.Storage/storageAccounts/jpsadiag2123"
+                    "retentionpolicy": "7"
                 }
             }
         },

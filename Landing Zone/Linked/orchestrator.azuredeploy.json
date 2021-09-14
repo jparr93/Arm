@@ -114,28 +114,6 @@
                     }
                 }
             }
-        },
-        {
-
-            "name": "fwdiag-deploy",
-            "type": "Microsoft.Resources/deployments",
-            "apiVersion": "2020-10-01",
-            "dependsOn": [ "[resourceId('Microsoft.Resources/deployments', 'law-deploy')]" ],
-            "properties": {
-                "mode": "Incremental",
-                "templateLink": {
-                    "uri": "[concat (variables('linkedtemplateuri'), 'firewalldiag.azuredeploy.json')]",
-                    "contentVersion": "1.0.0.0"
-                },
-                "parameters": {
-                    "firewalldiagnostics": {
-                        "value": "[parameters('FirewallParameters').diagnostics]"
-                    },
-                    "firewall": {
-                        "value": "[parameters('FirewallParameters').firewall]"
-                    }
-                }
-            }
         }
     ]
 }
