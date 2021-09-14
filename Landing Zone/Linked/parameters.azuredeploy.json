@@ -98,27 +98,19 @@
         "MonitoringParameters": {
             "value": {
                 "loganalytics": {
-                        "name": "lz-law",
-                        "tags": {
-                            "Environment": "JP",
-                            "Application": "Monitoring"
-                        },
-                        "sku" : {
-                            "name": "pergb2018",
-                            "tier": "pergb2018"
-                        },
-                        "retentionindays": "120",
-                        "resourcepermissions": "true"
-
+                    "name": "lz-law",
+                    "tags": {
+                        "Environment": "JP",
+                        "Application": "Monitoring"
+                    },
+                    "sku": {
+                        "name": "pergb2018",
+                        "tier": "pergb2018"
+                    },
+                    "retentionindays": "120",
+                    "resourcepermissions": "true"
                 }
             }
-        },
-        "DiagnosticStorageParameters":{
-         "value": {
-             "storageaccount": {
-                 "name":"lzsadiag"
-             }
-         }   
         }
     }
 }

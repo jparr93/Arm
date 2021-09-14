@@ -7,16 +7,12 @@
         },
         "firewall": {
             "type": "object"
-        },
-        "storageaccount": {
-            "type": "object"
         }
     
 },
 "variables": {
             "retentionpolicy": "[parameters('firewalldiagnostics').retentionpolicy]",
-            "Storageaccountname":  "[parameters('storageaccount').name]",
-            "storageaccountresourceid": "[concat('Microsoft.Storage/storageAccounts/',variables('Storageaccountname'), uniqueString(resourceGroup().id))]"
+            "storageaccountresourceid": "/subscriptions/3fcee2cc-1758-46d1-b7b7-d9d3f031c9b1/resourcegroups/lz-rg-diag/providers/Microsoft.Storage/storageAccounts/jpsadiag2123"
 }, 
 "resources": [
     {
