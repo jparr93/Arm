@@ -109,7 +109,7 @@
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {
-                    "gateway": {
+                    "loganalytics": {
                         "value": "[parameters('MonitoringParameters').loganalytics]"
                     }
                 }

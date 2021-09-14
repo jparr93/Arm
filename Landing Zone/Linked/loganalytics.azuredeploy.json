@@ -2,12 +2,12 @@
   "$schema": "https://schema.management.azure.com/schemas/2019-08-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
-    "localgateway": {
+    "loganalytics": {
       "type": "object"
     }
   },
   "variables": {
-        "localNetworkGatewayName": "[parameters('localgateway').name]"
+        "localNetworkGatewayName": "[parameters('loganalytics').name]"
   },
   "resources": [
     {
@@ -15,12 +15,12 @@
       "name": "[variables('localNetworkGatewayName')]",
       "apiVersion": "2020-08-01",
       "location": "[resourceGroup().location]",
-      "tags": "[parameters('localgateway').tags]",
+      "tags": "[parameters('loganalytics').tags]",
       "properties": {
         "sku": {
-          "name": "[parameters('localgateway').sku]"
+          "name": "[parameters('loganalytics').sku]"
         },
-        "retentionInDays": "[parameters('localgateway').retentionindays]",
+        "retentionInDays": "[parameters('loganalytics').retentionindays]",
         "features": {
           "searchVersion": 1,
           "legacy": 0,
