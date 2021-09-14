@@ -25,7 +25,7 @@
                         "properties": {
                             "addressPrefix": "192.168.10.0/24",
                             "hasBgpOverride": "false",
-                            "nextHopIpAddress": "192.168.10.0/24",
+                            "nextHopIpAddress": "192.168.11.1",
                             "nextHopType": "VirtualAppliance"
                         },
                         "type": "VirtualAppliance"
