@@ -61,7 +61,8 @@
                     "applicationRuleCollections": []
                 },
                 "diagnostics": {
-                    "retentionpolicy": "7"
+                    "retentionpolicy": "7",
+                    "said": "/subscriptions/3fcee2cc-1758-46d1-b7b7-d9d3f031c9b1/resourcegroups/lz-rg-diag/providers/Microsoft.Storage/storageAccounts/jpsadiag2123"
                 }
             }
         },
