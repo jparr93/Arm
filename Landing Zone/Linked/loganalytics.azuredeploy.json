@@ -7,12 +7,12 @@
     }
   },
   "variables": {
-        "localNetworkGatewayName": "[parameters('loganalytics').name]"
+        "loganalyticsName": "[parameters('loganalytics').name]"
   },
   "resources": [
     {
       "type": "Microsoft.OperationalInsights/workspaces",
-      "name": "[variables('localNetworkGatewayName')]",
+      "name": "[variables('loganalyticsName')]",
       "apiVersion": "2020-08-01",
       "location": "[resourceGroup().location]",
       "tags": "[parameters('loganalytics').tags]",
@@ -24,7 +24,7 @@
         "features": {
           "searchVersion": 1,
           "legacy": 0,
-          "enableLogAccessUsingOnlyResourcePermissions": "[parameters('localgateway').resourcepermissions]"
+          "enableLogAccessUsingOnlyResourcePermissions": "[parameters('loganalytics').resourcepermissions]"
         }
       }
     }
