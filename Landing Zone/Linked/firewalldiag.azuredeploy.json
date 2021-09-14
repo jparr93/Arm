@@ -20,7 +20,7 @@
         "name": "[concat(parameters('firewall').name, '/Microsoft.Insights/FW-SA-Setting')]",
         "dependsOn": [],
         "properties": {
-            "storageAccountId": "/subscriptions/3fcee2cc-1758-46d1-b7b7-d9d3f031c9b1/resourcegroups/lz-rg-diag/providers/Microsoft.Storage/storageAccounts/jpsadiag2123",
+            "storageAccountId": "/Microsoft.Storage/storageAccounts/jpsadiag2123",
             "logs": [
                 {
                     "category": "AzureFirewallApplicationRule",
