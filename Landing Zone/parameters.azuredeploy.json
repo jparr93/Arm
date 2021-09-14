@@ -39,7 +39,14 @@
                             }
                         }
                     ]
+                },
+                "routetable": {
+                  "name": "lz-rt",
+                  "tags": {
+                    "Environment": "DEV",
+                    "Application": "LZ" 
                 }
+              }
             }
         },
         "FirewallParameters": {
@@ -245,9 +252,6 @@
                         },
                         "gatewayIpAddress": "109.232.61.236"
                     }
-                },
-                "routetable": {
-                  "name": "lz-rt"
                 }
             }
         },

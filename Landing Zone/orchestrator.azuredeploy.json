@@ -115,7 +115,7 @@
                 }
             }
         },
-               {
+        {
 
             "name": "rt-deploy",
             "type": "Microsoft.Resources/deployments",
@@ -131,9 +131,9 @@
                     "routetable": {
                         "value": "[parameters('VirtualNetworkParameters').routetable]"
                     }
-                    }
                 }
             }
         }
+
     ]
 }
