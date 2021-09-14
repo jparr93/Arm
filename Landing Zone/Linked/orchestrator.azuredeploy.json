@@ -10,6 +10,9 @@
         },
         "FirewallParameters": {
             "type": "object"
+        },
+        "MonitoringParameters": {
+            "type": "object"
         }
     },
     "variables": {
@@ -70,6 +73,44 @@
                     },
                     "networks": {
                         "value": "[parameters('VirtualNetworkParameters').networks]"
+                    }
+                }
+            }
+        },
+        {
+
+            "name": "lng-deploy",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2020-10-01",
+            "dependsOn": [ "[resourceId('Microsoft.Resources/deployments', 'gw-deploy')]" ],
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[concat (variables('linkedtemplateuri'), 'localnetworkgateway.azuredeploy.json')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "localgateway": {
+                        "value": "[parameters('VirtualNetworkGatewayParameters').localgateway]"
+                    }
+                }
+            }
+        },
+        {
+
+            "name": "law-deploy",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2020-10-01",
+            "dependsOn": [ "[resourceId('Microsoft.Resources/deployments', 'lng-deploy')]" ],
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[concat (variables('linkedtemplateuri'), 'loganalytics.azuredeploy.json')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "gateway": {
+                        "value": "[parameters('MonitoringParameters').loganalytics]"
                     }
                 }
             }
