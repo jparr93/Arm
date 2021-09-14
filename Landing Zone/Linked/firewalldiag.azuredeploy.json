@@ -43,7 +43,7 @@
                 {
                     "category": "AllMetrics",
                     "enabled": true,
-                    "retentionPolicy": "[parameters('retentionPolicy')]"
+                    "retentionPolicy": "[variables('retentionpolicy')]"
                 }
             ]
         }
